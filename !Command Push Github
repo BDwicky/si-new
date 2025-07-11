@@ -1,0 +1,12 @@
+git add .
+git commit -m "Your commit message here"
+git pull origin main
+git push origin main
+
+add remote
+git remote add origin https://github.com/BDwicky/Sistem-Informasi-UKM.git
+
+run Local
+php spark serve
+
+composer install
