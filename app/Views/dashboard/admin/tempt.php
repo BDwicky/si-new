@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UKM Universitas Dr. Soetomo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Reset & Base Styles */
@@ -622,6 +624,7 @@
             color: #4299e1;
         }
 
+
         /* Responsive Footer */
         @media (max-width: 768px) {
             .footer-col {
@@ -749,6 +752,19 @@
             .testimonial-card {
                 min-width: 300px;
             }
+
+        }
+
+        /* Animation for elements in viewport */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 576px) {
@@ -866,6 +882,27 @@
                 </div>
             </div>
         </div>
+
+        <!-- Baru -->
+        <!-- <div class="stats animate-in">
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">UKM Kampus</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2000+</span>
+                <span class="stat-label">Anggota Aktif</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Universitas</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Kepuasan Pengguna</span>
+            </div>
+        </div> -->
+
     </section>
 
     <!-- Gallery Section -->
