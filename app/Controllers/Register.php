@@ -7,6 +7,12 @@ use CodeIgniter\Controller;
 
 class Register extends Controller
 {
+    protected $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
     public function index()
     {
         return view('register/index');
@@ -14,28 +20,22 @@ class Register extends Controller
 
     public function store()
     {
-        $validation = \Config\Services::validation();
-
-        $rules = [
-            'nim'           => 'required|is_unique[user.nim]',
-            'nama_lengkap'  => 'required',
-            'email'         => 'required|valid_email|is_unique[user.email]',
-            'no_telp'       => 'required',
-            'password'      => 'required|min_length[6]'
-        ];
-
-        if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error', implode('<br>', $validation->getErrors()));
+        try {
+            $this->userModel->save([
+                'username' => $this->request->getPost('username'),
+                'name' => $this->request->getPost('name'),
+                'email' => $this->request->getPost('email'),
+                'nim' => $this->request->getPost('nim'),
+                'fakultas' => $this->request->getPost('fakultas'),
+                'program_studi' => $this->request->getPost('program_studi'),
+                'role_id' => $this->request->getPost('role_id') ?: 3, // Default to 'User' role if not provided
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ]);
+            session()->setFlashdata('success', 'User berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            session()->setFlashdata('error', 'Gagal menambahkan User: ' . $e->getMessage());
+            return redirect()->back()->withInput();
         }
-
-        $model = new UserModel();
-        $model->save([
-            'nim'           => $this->request->getPost('nim'),
-            'nama_lengkap'  => $this->request->getPost('nama_lengkap'),
-            'email'         => $this->request->getPost('email'),
-            'no_telp'       => $this->request->getPost('no_telp'),
-            'password'      => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
-        ]);
 
         return redirect()->to('/login')->with('success', 'Pendaftaran berhasil! Silakan login.');
     }

@@ -26,35 +26,15 @@ $routes->get('/logout', 'Login::logout');
 $routes->get('/register', 'Register::index');
 $routes->post('/register', 'Register::store');
 
-
-
 /**
  * PRIVATE ROUTES
  */
 
-// routes super admin (admin universitas)
-$routes->get('dashboard/super-admin', 'SuperAdmin::index');
-$routes->get('dashboard/super-admin/ukm', 'SuperAdmin::ukm');
+// routes super admin (admin universitas)   
+$routes->get('dashboard/users', 'User::index');
+$routes->get('dashboard/users/create', 'User::create');
+$routes->post('dashboard/users/store', 'User::store');
+$routes->get('dashboard/users/edit/(:num)', 'User::edit/$1');
+$routes->post('dashboard/users/update/(:num)', 'User::update/$1');
+$routes->post('dashboard/users/delete/(:num)', 'User::delete/$1');
 
-
-
-// routes admin
-$routes->get('dashboard/admin', 'Admin::index');
-$routes->get('dashboard/admin/struktur-ukm', 'Admin::strukturUKM');
-$routes->get('dashboard/admin/kalender', 'Admin::kalender');
-$routes->get('dashboard/admin/list-anggota', 'Admin::listAnggota');
-$routes->get('dashboard/admin/pendaftar', 'Admin::pendaftar');
-$routes->get('dashboard/admin/tempt', 'Admin::tempt');
-
-
-
-
-
-
-// routes user
-$routes->get('dashboard/user', 'Mahasiswa::index');
-$routes->get('mahasiswa/', 'Mahasiswa::create'); //register
-$routes->post('mahasiswa/store', 'Mahasiswa::store');
-$routes->get('mahasiswa/edit/(:num)', 'Mahasiswa::edit/$1');
-$routes->post('mahasiswa/update/(:num)', 'Mahasiswa::update/$1');
-$routes->get('mahasiswa/delete/(:num)', 'Mahasiswa::delete/$1');

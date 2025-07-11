@@ -266,10 +266,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fullname">Nama Lengkap</label>
-                            <input type="text" id="fullname" name="fullname" class="form-input" placeholder="Nama lengkap" required>
-                            <?php if (isset($validation) && $validation->hasError('fullname')): ?>
-                                <span class="error-message"><?= $validation->getError('fullname') ?></span>
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Nama lengkap" required>
+                            <?php if (isset($validation) && $validation->hasError('name')): ?>
+                                <span class="error-message"><?= $validation->getError('name') ?></span>
                             <?php endif; ?>
                         </div>
 
@@ -303,8 +303,8 @@
                     <div class="form-column">
                         <!-- Kolom Kedua -->
                         <div class="form-group">
-                            <label for="faculty">Fakultas</label>
-                            <select id="faculty" name="faculty" class="form-input" required>
+                            <label for="fakultas">Fakultas</label>
+                            <select id="fakultas" name="fakultas" class="form-input" required>
                                 <option value="">Pilih Fakultas</option>
                                 <option value="Fakultas Ekonomi dan Bisnis">Fakultas Ekonomi dan Bisnis</option>
                                 <option value="Fakultas Hukum">Fakultas Hukum</option>
@@ -314,16 +314,16 @@
                                 <option value="Fakultas Ilmu Komunikasi">Fakultas Ilmu Komunikasi</option>
                                 <option value="Fakultas Pertanian">Fakultas Pertanian</option>
                             </select>
-                            <?php if (isset($validation) && $validation->hasError('faculty')): ?>
-                                <span class="error-message"><?= $validation->getError('faculty') ?></span>
+                            <?php if (isset($validation) && $validation->hasError('fakultas')): ?>
+                                <span class="error-message"><?= $validation->getError('fakultas') ?></span>
                             <?php endif; ?>
                         </div>
 
                         <div class="form-group">
-                            <label for="study_program">Program Studi</label>
-                            <input type="text" id="study_program" name="study_program" class="form-input" placeholder="Program studi" required>
-                            <?php if (isset($validation) && $validation->hasError('study_program')): ?>
-                                <span class="error-message"><?= $validation->getError('study_program') ?></span>
+                            <label for="program_studi">Program Studi</label>
+                            <input type="text" id="program_studi" name="program_studi" class="form-input" placeholder="Program studi" required>
+                            <?php if (isset($validation) && $validation->hasError('program_studi')): ?>
+                                <span class="error-message"><?= $validation->getError('program_studi') ?></span>
                             <?php endif; ?>
                         </div>
 
