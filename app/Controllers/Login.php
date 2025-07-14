@@ -17,31 +17,34 @@ class Login extends BaseController
         $session = session();
         $model = new UserModel();
 
-        $email = $this->request->getPost('email');
+        $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $user = $model->where('email', $email)->first();
+        $user = $model->where('username', $username)->first();
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                // Set session
-                $session->set([
-                    'id_user' => $user['id_user'],
-                    'nama_lengkap' => $user['nama_lengkap'],
-                    'logged_in' => true
-                ]);
-                return redirect()->to('/')->with('success', 'Login berhasil.'); // Save State Login
-            } else {
-                return redirect()->back()->withInput()->with('error', 'Password salah!');
-            }
+        if ($user && password_verify($password, $user['password'])) {
+            // Set session server-side
+            $session->set([
+                'id_user' => $user['id'],
+                'name' => $user['name'],
+                'username' => $user['username'],
+                'email' => $user['email'],
+                'role' => $user['role_id'],
+                'logged_in' => true
+            ]);
+
+            // Redirect ke dashboard admin
+            return redirect()->to(base_url('dashboard/admin'))->with('success', 'Login berhasil.');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Email tidak terdaftar!');
+            return redirect()->back()->withInput()->with('error', 'Username atau Password salah!');
         }
     }
 
     public function logout()
     {
-        session()->destroy();
-        return redirect()->to('/login')->with('success', 'Anda sudah logout.');
+        $session = session();
+        $session->destroy();  // Hapus semua session
+
+        return redirect()->to(base_url('/'))->with('success', 'Berhasil logout.');
     }
 }

@@ -14,6 +14,7 @@ class UserModel extends Model
         'name',
         'email',
         'nim',
+        'phone',
         'fakultas',
         'program_studi',
         'role_id',
