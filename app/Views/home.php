@@ -1,49 +1,214 @@
-<?= $this->include('templates/header') ?>   
+<?= $this->include('templates/header') ?>
+<!DOCTYPE html>
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SI UKM - Sistem Informasi Unit Kegiatan Mahasiswa</title>
+    <title>SI UKM - Universitas Dr. Soetomo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            border: 1px solid #ced4da;
+            font-size: 1rem;
+        }
+
+        .category-btn {
+            border: none;
+            background: #f8f9fa;
+            padding: 8px 15px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
+<body>
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content">
                     <h1>Unit Kegiatan Mahasiswa Universitas Dr. Soetomo</h1>
-                    <p>Platform digital seluruh aktivitas UKM kampus Universitas Dr.Soetomo</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-light btn-lg">Pelajari Lebih Lanjut</button> 
+                    <p>Temukan wadah pengembangan diri melalui berbagai kegiatan mahasiswa yang menarik dan bermanfaat. Platform digital ini menyediakan informasi lengkap tentang seluruh UKM di kampus kami.</p>
+                    <div class="hero-buttons d-flex">
+                        <a href="#features" class="btn btn-light btn-lg me-3">Jelajahi UKM</a>
+                        <a href="#about" class="btn btn-outline-light btn-lg">Tentang Kami</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="text-center">
-                        <i class="fas fa-graduation-cap" style="font-size: 15rem; color: rgba(255,255,255,0.2);"></i>
+                        <img src="<?= base_url('assets/images/hero-image.png') ?>" alt="Mahasiswa Beraktivitas" class="img-fluid rounded-3 shadow-lg" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
+    <!-- UKM Listing Section -->
+    <section id="features" class="py-5">
         <div class="container">
-            <div class="row text-center mb-5">
+            <div class="row text-center mb-2">
                 <div class="col-12">
-                    <h2 class="display-4 fw-bold mb-3">Daftar UKM</h2>
-                    <p class="lead text-muted">Dapatkan informasi lengkap tentang Unit Kegiatan Mahasiswa</p>
+                    <h2 class="display-4 fw-bold mb-2">Daftar UKM</h2>
+                    <p class="lead text-muted mb-2">Temukan UKM yang sesuai dengan minat dan bakat Anda</p>
                 </div>
             </div>
 
-            <div class="search-section">
+            <div class="search-section mb-4">
                 <div class="search-box">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" id="searchInput" placeholder="Cari UKM berdasarkan nama atau deskripsi...">
+                    <button class="btn btn-sm btn-outline-secondary position-absolute end-0 top-50 translate-middle-y me-2" id="clearSearch">Bersihkan</button>
                 </div>
-                
-                <div class="category-filters">
+
+                <div class="category-filters mt-3 d-flex flex-wrap justify-content-center">
                     <button class="category-btn active" data-category="all">
                         <i class="fas fa-th-large me-2"></i>Semua
                     </button>
@@ -68,54 +233,264 @@
                 </div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card animate-in">
-                        <a href="<?= base_url('detail-ukm') ?>" style="text-decoration: none;">
-                        <div class="feature-icon">
-                            <img src="" alt="image cok">
+            <div id="noResults" class="text-center my-5 d-none">
+                <img src="<?= base_url('assets/images/no-results.png') ?>" alt="Tidak ditemukan" width="150" class="mb-3" loading="lazy">
+                <h4>UKM tidak ditemukan</h4>
+                <p class="text-muted">Coba gunakan kata kunci lain atau pilih kategori berbeda</p>
+            </div>
+
+            <div class="row g-4" id="ukmContainer">
+                <!-- UKM 1 - Paduan Suara -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="seni-budaya" data-name="paduan suara mahasiswa">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-music fa-3x text-primary me-3"></i>
+                                <h4 class="mb-0">Paduan Suara Mahasiswa</h4>
+                            </div>
+                            <p class="text-muted">Wadah bagi mahasiswa pecinta musik vokal. Kami rutin mengadakan latihan mingguan dan tampil di berbagai acara kampus.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary"><i class="fas fa-palette me-1"></i> Seni & Budaya</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 150+ anggota</small>
+                            </div>
                         </div>
-                            
-                            <h4>UKM Seni & Budaya</h4>
-                            <p>Wadah bagi mahasiswa dalam menyalurkan bakat seni seperti tari, musik, dan teater kampus.</p>
-                        </div>
-                        </a>
                     </div>
+                </div>
+
+                <!-- UKM 2 - Basket -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="olahraga" data-name="ukm basket">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-basketball-ball fa-3x text-success me-3"></i>
+                                <h4 class="mb-0">UKM Basket</h4>
+                            </div>
+                            <p class="text-muted">Komunitas basket kampus yang aktif berlatih dan mengikuti kompetisi antar universitas. Terbuka untuk semua skill level.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success"><i class="fas fa-dumbbell me-1"></i> Olahraga</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 80+ anggota</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UKM 3 - Robotika -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="teknologi" data-name="ukm robotika">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-robot fa-3x text-info me-3"></i>
+                                <h4 class="mb-0">UKM Robotika</h4>
+                            </div>
+                            <p class="text-muted">Mengembangkan inovasi di bidang robotika melalui penelitian, workshop, dan kompetisi nasional/internasional.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info"><i class="fas fa-laptop-code me-1"></i> Teknologi</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 60+ anggota</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UKM 4 - Debat -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="akademik" data-name="ukm debat mahasiswa">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-comments fa-3x text-warning me-3"></i>
+                                <h4 class="mb-0">UKM Debat Mahasiswa</h4>
+                            </div>
+                            <p class="text-muted">Mengasah kemampuan berpikir kritis dan public speaking melalui kegiatan debat kompetitif dengan sistem parlementer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning text-dark"><i class="fas fa-graduation-cap me-1"></i> Akademik</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 45+ anggota</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UKM 5 - Rohis -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="keagamaan" data-name="rohani islam">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-mosque fa-3x text-secondary me-3"></i>
+                                <h4 class="mb-0">Rohani Islam (ROHIS)</h4>
+                            </div>
+                            <p class="text-muted">Meningkatkan pemahaman dan pengamalan ajaran Islam melalui kajian, dakwah, dan kegiatan sosial keagamaan.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-secondary"><i class="fas fa-mosque me-1"></i> Keagamaan</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 200+ anggota</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UKM 6 - KPM -->
+                <div class="col-lg-4 col-md-6 ukm-item" data-category="sosial" data-name="keluarga peduli masyarakat">
+                    <div class="feature-card h-100">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-hands-helping fa-3x text-danger me-3"></i>
+                                <h4 class="mb-0">Keluarga Peduli Masyarakat (KPM)</h4>
+                            </div>
+                            <p class="text-muted">Melakukan berbagai kegiatan pengabdian masyarakat seperti bakti sosial, pendidikan anak jalanan, dan pembangunan desa.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-danger"><i class="fas fa-handshake me-1"></i> Sosial</span>
+                                <small class="text-muted"><i class="fas fa-users me-1"></i> 120+ anggota</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-primary px-4" id="loadMore">Muat Lebih Banyak</button>
             </div>
         </div>
     </section>
 
-
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Benefits Section -->
+    <section class="benefits py-5 bg-light">
         <div class="container">
-            <div class="row about-content">
-                <div class="col">
-                    <div class="about-text animate-in">
-                        <h2>Mengapa Pilih SI UKM?</h2>
-                        <p>SI UKM hadir untuk membantu Unit Kegiatan Mahasiswa dalam mengelola administrasi dan kegiatan secara digital. Platform kami dirancang khusus untuk kebutuhan organisasi kemahasiswaan yang dinamis.</p>
-                        <p>Kami memahami tantangan yang dihadapi UKM dalam pengelolaan anggota, kegiatan, dan pelaporan. SI UKM memberikan solusi terintegrasi yang mudah digunakan untuk semua stakeholder UKM.</p>
-                        <button class="btn btn-primary btn-lg">Hubungi Kami</button>
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold">Manfaat Bergabung dengan UKM</h2>
+                    <p class="lead text-muted">Temukan berbagai keuntungan yang bisa Anda dapatkan</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-primary">
+                            <i class="fas fa-users fa-3x"></i>
+                        </div>
+                        <h4>Perluas Jaringan</h4>
+                        <p class="text-muted">Bertemu dengan mahasiswa dari berbagai fakultas dengan minat yang sama, membangun relasi yang bermanfaat untuk masa depan.</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="text-center">
-                        <i class="fas fa-university" style="font-size: 12rem; color: var(--primary-color); opacity: 0.1;"></i>
+
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-success">
+                            <i class="fas fa-brain fa-3x"></i>
+                        </div>
+                        <h4>Kembangkan Soft Skills</h4>
+                        <p class="text-muted">Asah kemampuan kepemimpinan, kerja tim, manajemen waktu, dan public speaking melalui berbagai kegiatan UKM.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-warning">
+                            <i class="fas fa-trophy fa-3x"></i>
+                        </div>
+                        <h4>Raih Prestasi</h4>
+                        <p class="text-muted">Ikuti kompetisi dan ajang bergengsi mewakili universitas, tingkatkan CV dan portofolio Anda.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-danger">
+                            <i class="fas fa-heart fa-3x"></i>
+                        </div>
+                        <h4>Jaga Kesehatan</h4>
+                        <p class="text-muted">Aktivitas fisik dan mental yang seimbang melalui UKM membantu menjaga kesehatan selama masa kuliah.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-info">
+                            <i class="fas fa-book fa-3x"></i>
+                        </div>
+                        <h4>Belajar di Luar Kelas</h4>
+                        <p class="text-muted">Dapatkan pengetahuan dan pengalaman praktis yang tidak diajarkan di ruang kuliah.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="benefit-card p-4 h-100 bg-white rounded-3 shadow-sm">
+                        <div class="benefit-icon mb-3 text-secondary">
+                            <i class="fas fa-smile fa-3x"></i>
+                        </div>
+                        <h4>Hilangkan Stres</h4>
+                        <p class="text-muted">Kegiatan UKM menjadi sarana refreshing yang sehat dari rutinitas akademik yang padat.</p>
                     </div>
                 </div>
             </div>
-            <div class="stats animate-in">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-text animate-in">
+                        <h2 class="fw-bold mb-4">Tentang SI UKM Universitas Dr. Soetomo</h2>
+                        <p class="lead">SI UKM adalah platform digital terpadu untuk mengelola seluruh aktivitas Unit Kegiatan Mahasiswa di lingkungan Universitas Dr. Soetomo.</p>
+                        <p>Kami menyediakan solusi lengkap mulai dari pendaftaran anggota, pengelolaan kegiatan, hingga pelaporan aktivitas UKM secara transparan dan efisien.</p>
+
+                        <div class="about-features mt-4">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 text-primary me-3">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <strong>Manajemen Anggota Terpadu</strong> - Sistem database anggota yang terorganisir dengan baik
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 text-primary me-3">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <strong>Kalender Kegiatan</strong> - Pantau seluruh agenda UKM dalam satu platform
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 text-primary me-3">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <strong>Pelaporan Digital</strong> - Laporan kegiatan dan keuangan yang transparan
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 text-primary me-3">
+                                    <i class="fas fa-check-circle fa-lg"></i>
+                                </div>
+                                <div>
+                                    <strong>Komunikasi Efektif</strong> - Sistem notifikasi terintegrasi untuk seluruh anggota
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image text-center animate-in">
+                        <img src="<?= base_url('assets/images/about-image.jpg') ?>" alt="Tentang SI UKM" class="img-fluid rounded-3 shadow" loading="lazy">
+                        <div class="image-caption mt-3 p-3 bg-light rounded">
+                            <p class="mb-0">SI UKM telah membantu lebih dari 50 UKM dalam mengelola kegiatan mereka secara digital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats animate-in mt-5">
                 <div class="stat-item">
                     <span class="stat-number">50+</span>
-                    <span class="stat-label">UKM Kampus</span>
+                    <span class="stat-label">UKM Terdaftar</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">2000+</span>
                     <span class="stat-label">Anggota Aktif</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Universitas</span>
+                    <span class="stat-number">300+</span>
+                    <span class="stat-label">Kegiatan/Tahun</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">95%</span>
@@ -125,21 +500,181 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
+    <!-- Testimonial Section -->
+    <section class="testimonials py-5 bg-light">
         <div class="container">
-            <div class="cta-content">
-                <h2>Siap Digitalisasi UKM Anda?</h2>
-                <p>Bergabunglah dengan ratusan UKM yang telah merasakan kemudahan pengelolaan dengan SI UKM</p>
-                <button class="btn btn-outline-light btn-lg me-3">Mulai Uji Coba</button>
-                <button class="btn btn-primary btn-lg">Konsultasi Gratis</button>
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold">Apa Kata Mereka?</h2>
+                    <p class="lead text-muted">Testimoni dari pengguna SI UKM</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="<?= base_url('assets/images/testimonials/1.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 1" loading="lazy">
+                            <div>
+                                <h5 class="mb-0">Budi Santoso</h5>
+                                <small class="text-muted">Ketua UKM Basket</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"SI UKM sangat membantu dalam mengelola anggota dan jadwal latihan. Sistem pendaftaran online juga memudahkan mahasiswa baru yang ingin bergabung."</p>
+                        <div class="rating mt-2 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="<?= base_url('assets/images/testimonials/2.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 2" loading="lazy">
+                            <div>
+                                <h5 class="mb-0">Anita Rahayu</h5>
+                                <small class="text-muted">Anggota UKM Robotika</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Dengan SI UKM, saya bisa dengan mudah melihat jadwal kegiatan dan materi pelatihan. Fitur diskusi online juga sangat membantu kolaborasi antar anggota."</p>
+                        <div class="rating mt-2 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="<?= base_url('assets/images/testimonials/3.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 3" loading="lazy">
+                            <div>
+                                <h5 class="mb-0">Dr. Surya Wijaya</h5>
+                                <small class="text-muted">Pembina UKM</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Sebagai pembina, saya sangat terbantu dengan laporan otomatis dari SI UKM. Monitoring perkembangan setiap UKM menjadi lebih mudah dan transparan."</p>
+                        <div class="rating mt-2 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="display-4 fw-bold">Pertanyaan Umum</h2>
+                    <p class="lead text-muted">Temukan jawaban atas pertanyaan Anda</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item mb-3 border rounded animate-in">
+                            <h3 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Bagaimana cara bergabung dengan UKM?
+                                </button>
+                            </h3>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Anda bisa mendaftar melalui menu pendaftaran online di platform SI UKM atau datang langsung ke stand UKM saat masa orientasi mahasiswa baru. Setiap UKM mungkin memiliki persyaratan khusus yang perlu dipenuhi.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded animate-in">
+                            <h3 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Apakah ada biaya keanggotaan?
+                                </button>
+                            </h3>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Beberapa UKM mungkin memungut iuran anggota untuk operasional kegiatan, namun besarnya bervariasi tergantung jenis UKM. Informasi detail bisa Anda dapatkan di halaman masing-masing UKM.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded animate-in">
+                            <h3 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Bisakah saya bergabung dengan lebih dari satu UKM?
+                                </button>
+                            </h3>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Ya, Anda bisa bergabung dengan lebih dari satu UKM selama mampu membagi waktu dengan baik. Namun kami sarankan untuk tidak bergabung lebih dari 3 UKM agar tidak mengganggu aktivitas akademik.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded animate-in">
+                            <h3 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Bagaimana jika UKM yang saya minati tidak ada?
+                                </button>
+                            </h3>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Anda bisa mengajukan pembentukan UKM baru dengan memenuhi persyaratan tertentu seperti memiliki minimal 15 anggota dan pembina dari dosen. Proses pengajuan bisa dilakukan melalui menu "Ajukan UKM Baru" di dashboard SI UKM.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border rounded animate-in">
+                            <h3 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Apakah kegiatan UKM mendapatkan SKS?
+                                </button>
+                            </h3>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Beberapa kegiatan UKM tertentu yang memenuhi syarat bisa dikonversi menjadi SKS melalui program Merdeka Belajar Kampus Merdeka (MBKM). Konsultasikan dengan pembimbing akademik Anda untuk informasi lebih lanjut.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-3">Siap Bergabung dengan UKM?</h2>
+                    <p class="lead mb-lg-0">Temukan UKM yang sesuai dengan minat dan bakat Anda, dan mulailah petualangan seru selama masa kuliah!</p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                    <a href="<?= base_url('register') ?>" class="btn btn-light btn-lg me-3">Daftar Sekarang</a>
+                </div>
             </div>
         </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Navbar scroll effect
+        // Navbar scroll effect (tidak diubah)
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
@@ -149,9 +684,9 @@
             }
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling for navigation links (tidak diubah)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -163,7 +698,7 @@
             });
         });
 
-        // Animation on scroll
+        // Animation on scroll (tidak diubah)
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -181,26 +716,26 @@
             observer.observe(el);
         });
 
-        // Counter animation
+        // Counter animation (tidak diubah)
         function animateCounter(element) {
             const target = parseInt(element.textContent.replace(/[^\d]/g, ''));
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
-            
+
             const timer = setInterval(() => {
                 current += step;
                 if (current >= target) {
                     current = target;
                     clearInterval(timer);
                 }
-                
+
                 const suffix = element.textContent.match(/[^\d]+$/);
                 element.textContent = Math.floor(current) + (suffix ? suffix[0] : '');
             }, 16);
         }
 
-        // Animate counters when they come into view
+        // Animate counters when they come into view (tidak diubah)
         const counterObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -215,92 +750,91 @@
         });
     </script>
 
-     <script>
-        // Search and Filter functionality
+    <script>
+        // Search and Filter functionality - Bagian yang diperbaiki
         const searchInput = document.getElementById('searchInput');
         const categoryButtons = document.querySelectorAll('.category-btn');
         const ukmItems = document.querySelectorAll('.ukm-item');
         const noResults = document.getElementById('noResults');
-        
+        const loadMoreBtn = document.getElementById('loadMore');
+
         let currentCategory = 'all';
         let currentSearch = '';
-        
+        let visibleItems = [];
+
+        // Initialize - show all items initially
+        function initializeUKM() {
+            visibleItems = Array.from(ukmItems);
+            updateDisplay();
+        }
+
         // Search functionality
         searchInput.addEventListener('input', function() {
             currentSearch = this.value.toLowerCase();
             filterUKM();
         });
-        
+
         // Category filter functionality
         categoryButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all buttons
                 categoryButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
                 this.classList.add('active');
-                
-                // Update current category
                 currentCategory = this.dataset.category;
-                
-                // Filter UKM
                 filterUKM();
             });
         });
-        
+
+        // Filter UKM function
         function filterUKM() {
-            let visibleCount = 0;
-            
-            ukmItems.forEach(item => {
+            visibleItems = Array.from(ukmItems).filter(item => {
                 const itemCategory = item.dataset.category;
                 const itemName = item.dataset.name.toLowerCase();
-                
-                // Check category filter
+
                 const categoryMatch = currentCategory === 'all' || itemCategory === currentCategory;
-                
-                // Check search filter
                 const searchMatch = currentSearch === '' || itemName.includes(currentSearch);
-                
-                if (categoryMatch && searchMatch) {
-                    item.style.display = 'block';
-                    visibleCount++;
-                    
-                    // Add animation
-                    item.classList.remove('animate-in');
-                    setTimeout(() => {
-                        item.classList.add('animate-in');
-                    }, 50);
-                } else {
-                    item.style.display = 'none';
-                }
+
+                return categoryMatch && searchMatch;
             });
-            
+
+            updateDisplay();
+        }
+
+        // Update display after filtering
+        function updateDisplay() {
+            // Hide all items first
+            ukmItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            // Show filtered items
+            visibleItems.forEach(item => {
+                item.style.display = 'block';
+            });
+
             // Show/hide no results message
-            if (visibleCount === 0) {
+            if (visibleItems.length === 0) {
                 noResults.classList.remove('d-none');
             } else {
                 noResults.classList.add('d-none');
             }
         }
-        
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', function() {
-            ukmItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animate-in');
-                }, index * 100);
-            });
+
+        // Clear search functionality
+        document.getElementById('clearSearch')?.addEventListener('click', function() {
+            searchInput.value = '';
+            currentSearch = '';
+            filterUKM();
         });
-        
-        // Clear search button functionality
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Escape') {
-                this.value = '';
-                currentSearch = '';
-                filterUKM();
-            }
+
+        // Load more functionality (jika diperlukan)
+        loadMoreBtn?.addEventListener('click', function() {
+            // Implementasi load more jika diperlukan
+            console.log('Load more clicked');
         });
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', initializeUKM);
     </script>
 
 
-<?= $this->include('templates/footer') ?>
+    <?= $this->include('templates/footer') ?>
