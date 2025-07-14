@@ -34,7 +34,6 @@ $routes->post('/register', 'Register::store');
 $routes->get('dashboard/admin', 'User::index');
 $routes->get('dashboard/admin/create', 'User::create');
 $routes->post('dashboard/admin/store', 'User::store');
+$routes->delete('dashboard/admin/delete/(:num)', 'User::delete/$1');
 $routes->get('dashboard/admin/edit/(:num)', 'User::edit/$1');
 $routes->post('dashboard/admin/update/(:num)', 'User::update/$1');
-$routes->post('dashboard/admin/delete/(:num)', 'User::delete/$1');
-

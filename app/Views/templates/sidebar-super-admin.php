@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <style>
     /* Sidebar - Fixed Layout */
     .sidebar {
@@ -227,7 +229,7 @@
     .page-header {
         position: fixed;
         top: 0;
-        left: 250px;
+        left: 280px;
         right: 0;
         height: 60px;
         background: white;
@@ -274,6 +276,30 @@
             <h1 class="logo-title">Dashboard ADMIN UKM</h1>
             <p class="logo-subtitle">Universitas DR Soetomo</p>
         </div>
+        <div class="nav-container">
+            <nav>
+                <a href="<?= base_url('dashboard/admin') ?>" style="text-decoration: none;">
+                    <div class="nav-item ">
+                        <i class="fas fa-home"></i>
+                        <span>Home Dashboard</span>
+                    </div>
+                </a>
+
+                <a href="<?= base_url('dashboard/admin/create') ?>" style="text-decoration: none;">
+                    <div class="nav-item ">
+                        <i class="fas fa-home"></i>
+                        <span>Create Account</span>
+                    </div>
+                </a>
+
+                <a href="<?= base_url('dashboard/admin/edit') ?>" style="text-decoration: none;">
+                    <div class="nav-item ">
+                        <i class="fas fa-home"></i>
+                        <span>Edit Account</span>
+                    </div>
+                </a>
+            </nav>
+        </div>
 
         <div class="user-section-wrapper">
             <div class="user-section">
@@ -298,7 +324,7 @@
 
 
 <header class="page-header">
-
+    <h1>List User</h1>
 </header>
 
 <footer class="page-footer">

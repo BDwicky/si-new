@@ -33,6 +33,7 @@ class User extends Controller
                 'name' => $this->request->getPost('name'),
                 'email' => $this->request->getPost('email'),
                 'nim' => $this->request->getPost('nim'),
+                'phone' => $this->request->getPost('phone'),
                 'fakultas' => $this->request->getPost('fakultas'),
                 'program_studi' => $this->request->getPost('program_studi'),
                 'role_id' => $this->request->getPost('role_id'),
@@ -49,37 +50,47 @@ class User extends Controller
 
     public function edit($id)
     {
-        $data['user'] = $this->userModel->find($id);
-        return view('dashboard/admin/edit', $data);
+        $user = $this->userModel->find($id);
+
+        if (!$user) {
+            return redirect()->to(base_url('dashboard/admin'))->with('error', 'User tidak ditemukan.');
+        }
+
+        $data = [
+            'user' => $user
+        ];
+
+        return view('dashboard/admin/edit_user', $data);
     }
 
     public function update($id)
     {
+        // Validasi data bisa ditambahkan sesuai kebutuhan
         $data = [
-            'username' => $this->request->getPost('username'),
-            'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
-            'nim' => $this->request->getPost('nim'),
-            'fakultas' => $this->request->getPost('fakultas'),
-            'program_studi' => $this->request->getPost('program_studi'),
-            'role_id' => $this->request->getPost('role_id'),
+            'username'       => $this->request->getPost('username'),
+            'name'           => $this->request->getPost('name'),
+            'email'          => $this->request->getPost('email'),
+            'nim'            => $this->request->getPost('nim'),
+            'phone'          => $this->request->getPost('phone'),
+            'fakultas'       => $this->request->getPost('fakultas'),
+            'program_studi'  => $this->request->getPost('program_studi'),
+            'role_id'        => $this->request->getPost('role_id'),
         ];
 
-        $password = $this->request->getPost('password');
-        if (!empty($password)) {
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        // Kalau password diisi baru, update sekalian
+        if ($this->request->getPost('password')) {
+            $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
         }
 
         $this->userModel->update($id, $data);
 
-        session()->setFlashdata('success', 'User berhasil diupdate.');
-        return redirect()->to('/dashboard/admin');
+        return redirect()->to(base_url('dashboard/admin'))->with('success', 'User berhasil diupdate.');
     }
+
 
     public function delete($id)
     {
         $this->userModel->delete($id);
-        session()->setFlashdata('success', 'User berhasil dihapus.');
-        return redirect()->to('/dashboard/admin');
+        return redirect()->to(base_url('dashboard/admin'))->with('success', 'Data berhasil dihapus.');
     }
-}
+};

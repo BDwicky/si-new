@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use CodeIgniter\Controller;
+use Faker\Provider\bg_BG\PhoneNumber;
 
 class Register extends Controller
 {
@@ -26,6 +27,7 @@ class Register extends Controller
                 'name' => $this->request->getPost('name'),
                 'email' => $this->request->getPost('email'),
                 'nim' => $this->request->getPost('nim'),
+                'phone' => $this->request->getPost('phone'),
                 'fakultas' => $this->request->getPost('fakultas'),
                 'program_studi' => $this->request->getPost('program_studi'),
                 'role_id' => $this->request->getPost('role_id') ?: 3, // Default to 'User' role if not provided
