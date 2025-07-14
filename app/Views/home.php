@@ -342,10 +342,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-center mt-5">
-                <button class="btn btn-outline-primary px-4" id="loadMore">Muat Lebih Banyak</button>
-            </div>
         </div>
     </section>
 
