@@ -95,7 +95,7 @@
         color: #FF9E3B;
     }
 
-    .fa-sitemap {
+    .fa-pencil-alt {
         color: #6EE7B7;
     }
 
@@ -214,7 +214,11 @@
         align-items: center;
         color: #FFFFFF;
         font-size: 14px;
-        transition: background 0.2s;
+        transition: all 0.2s;
+        background: transparent;
+        border: none;
+        width: 100%;
+        text-align: left;
     }
 
     .logout-menu-item i {
@@ -224,6 +228,7 @@
 
     .logout-menu-item:hover {
         background: rgba(231, 74, 59, 0.2);
+        color: #fff;
     }
 
     .page-header {
@@ -287,17 +292,12 @@
 
                 <a href="<?= base_url('dashboard/admin/create') ?>" style="text-decoration: none;">
                     <div class="nav-item ">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-pencil-alt"></i>
                         <span>Create Account</span>
                     </div>
                 </a>
 
-                <a href="<?= base_url('dashboard/admin/edit') ?>" style="text-decoration: none;">
-                    <div class="nav-item ">
-                        <i class="fas fa-home"></i>
-                        <span>Edit Account</span>
-                    </div>
-                </a>
+
             </nav>
         </div>
 
@@ -312,10 +312,11 @@
                 </div>
                 <!-- Logout dropdown menu -->
                 <div class="logout-menu">
-                    <a href="<?= base_url('auth/logout') ?>" class="logout-menu-item">
+                    <a href="<?= base_url('logout') ?>" class="logout-menu-item">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>
+
                 </div>
             </div>
         </div>
@@ -324,7 +325,6 @@
 
 
 <header class="page-header">
-    <h1>List User</h1>
 </header>
 
 <footer class="page-footer">
@@ -344,7 +344,25 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('logoutForm').submit();
+                // Kirim request logout via fetch API
+                fetch("<?= base_url('auth/logout') ?>", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: new URLSearchParams({
+                            '<?= csrf_token() ?>': '<?= csrf_hash() ?>'
+                        })
+                    })
+                    .then(response => {
+                        // Redirect ke home setelah request selesai
+                        window.location.href = "<?= base_url('/') ?>";
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        window.location.href = "<?= base_url('/') ?>";
+                    });
             }
         });
     }

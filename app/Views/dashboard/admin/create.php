@@ -1,112 +1,94 @@
 <?= $this->include('templates/sidebar-super-admin') ?>
 
 <style>
-    /* Reset dan Base Styles */
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+    /* Styling untuk konten utama */
+    .main-content {
+        margin-left: 270px;
+        padding: 30px;
+        margin-top: 50px;
+        transition: all 0.3s ease;
     }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f5f5f5;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
-
-    h2 {
-        color: #2c3e50;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 0.5rem;
-    }
-
-    /* Form Styles */
     .form-container {
         background-color: #fff;
-        padding: 2rem;
+        padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        max-width: 800px;
     }
 
     .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 20px;
     }
 
     .form-label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 8px;
         font-weight: 600;
-        color: #2c3e50;
+        color: #444;
     }
 
-    .form-control {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
-
-    .form-control:focus {
-        border-color: #3498db;
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-    }
-
+    .form-control,
     .form-select {
         width: 100%;
-        padding: 0.75rem;
+        padding: 10px 15px;
         border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        background-color: #fff;
-        cursor: pointer;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s;
     }
 
-    /* Button Styles */
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
     .btn {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
+        padding: 10px 20px;
         background-color: #3498db;
         color: white;
         border: none;
-        border-radius: 4px;
-        font-size: 1rem;
+        border-radius: 6px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: inline-block;
     }
 
     .btn:hover {
         background-color: #2980b9;
+        transform: translateY(-2px);
     }
 
-    /* Responsive */
-    /* @media (max-width: 768px) {
-        .container {
-            margin: 1rem;
-            padding: 0 0.5rem;
-        }
 
-        .form-container {
-            padding: 1.5rem;
-        }
-    } */
+    .page-header {
+        margin-bottom: 30px;
+    }
+
+    /* Animasi untuk field tambahan */
+    .user-fields {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+
+    .user-fields.show {
+        max-height: 1000px;
+        opacity: 1;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px dashed #eee;
+    }
 </style>
 
-<div class="container">
-    <h2>Tambah User Baru</h2>
+<header class="page-header">
+    <h1>Tambah User Baru</h1>
+</header>
 
+<div class="main-content">
     <form action="<?= base_url('dashboard/admin/store') ?>" method="post" class="form-container">
         <div class="form-group">
             <label class="form-label">Role</label>
@@ -114,33 +96,34 @@
                 <option value="">-- Pilih Role --</option>
                 <option value="1">Admin</option>
                 <option value="2">UKM</option>
-                <option value="3">User</option>
+                <option value="3">User (Mahasiswa)</option>
             </select>
         </div>
+
         <div class="form-group">
             <label class="form-label">Username</label>
             <input type="text" name="username" class="form-control" placeholder="Masukkan username" required>
         </div>
 
         <div class="form-group">
-            <label class="form-label">Nama</label>
-            <input type="text" name="name" class="form-control" placeholder="Masukkan nama " required>
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" name="name" class="form-control" placeholder="Masukkan nama lengkap" required>
         </div>
 
         <div class="form-group">
             <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+            <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif" required>
         </div>
 
-        <div class="user-fields" style="display: none;">
+        <div class="user-fields" id="userFields">
             <div class="form-group">
                 <label class="form-label">NIM</label>
                 <input type="text" name="nim" class="form-control" placeholder="Masukkan NIM">
             </div>
 
             <div class="form-group">
-                <label class="form-label">No.Telp</label>
-                <input type="text" name="phone" class="form-control" placeholder="Masukkan No. Telp">
+                <label class="form-label">No. Telepon</label>
+                <input type="text" name="phone" class="form-control" placeholder="Masukkan nomor telepon">
             </div>
 
             <div class="form-group">
@@ -156,26 +139,42 @@
 
         <div class="form-group">
             <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+            <input type="password" name="password" class="form-control" placeholder="Buat password minimal 8 karakter" required>
+            <small class="text-muted" style="display: block; margin-top: 5px; color: #777;">Gunakan kombinasi huruf, angka, dan simbol</small>
         </div>
 
-        <button type="submit" class="btn">Simpan</button>
+        <div class="form-group" style="margin-top: 30px;">
+            <button type="submit" class="btn">
+                <i class="fas fa-save"></i> Simpan Data
+            </button>
+            <a href="<?= base_url('dashboard/admin') ?>" class="btn" style="background-color: #95a5a6; margin-left: 10px;">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+        </div>
     </form>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const roleSelect = document.getElementById('role_id');
-        const userFields = document.querySelector('.user-fields');
-
-        // Sembunyikan field tambahan saat pertama load
-        userFields.style.display = 'none';
+        const userFields = document.getElementById('userFields');
 
         roleSelect.addEventListener('change', function() {
-            if (this.value == '3') {
-                userFields.style.display = 'block';
+            if (this.value === '3') {
+                userFields.classList.add('show');
             } else {
-                userFields.style.display = 'none';
+                userFields.classList.remove('show');
+            }
+        });
+
+        // Validasi form sebelum submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (roleSelect.value === '3') {
+                const nim = document.querySelector('input[name="nim"]').value;
+                if (!nim) {
+                    alert('NIM wajib diisi untuk role User/Mahasiswa');
+                    e.preventDefault();
+                }
             }
         });
     });
