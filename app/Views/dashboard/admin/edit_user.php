@@ -135,6 +135,17 @@
         background: #f1f5f9;
     }
 
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        background: #f8fafc;
+        transition: all 0.2s;
+    }
+
     /* Icons */
     .icon {
         font-size: 1.1rem;
@@ -224,13 +235,30 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label class="form-label">Faculty</label>
-                            <input type="text" name="fakultas" value="<?= esc($user['fakultas']) ?>" class="form-control">
+                            <label for="fakultas" class="form-label">Faculty</label>
+                            <select id="fakultas" name="fakultas" class="form-input" required>
+                                <option value="Fakultas Ekonomi dan Bisnis" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Ekonomi dan Bisnis') ? 'selected' : '' ?>>Fakultas Ekonomi dan Bisnis</option>
+                                <option value="Fakultas Hukum" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Hukum') ? 'selected' : '' ?>>Fakultas Hukum</option>
+                                <option value="Fakultas Teknik" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Teknik') ? 'selected' : '' ?>>Fakultas Teknik</option>
+                                <option value="Fakultas Kedokteran" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Kedokteran') ? 'selected' : '' ?>>Fakultas Kedokteran</option>
+                                <option value="Fakultas Psikologi" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Psikologi') ? 'selected' : '' ?>>Fakultas Psikologi</option>
+                                <option value="Fakultas Ilmu Komunikasi" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Ilmu Komunikasi') ? 'selected' : '' ?>>Fakultas Ilmu Komunikasi</option>
+                                <option value="Fakultas Pertanian" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Pertanian') ? 'selected' : '' ?>>Fakultas Pertanian</option>
+                            </select>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="form-label">Study Program</label>
                             <input type="text" name="program_studi" value="<?= esc($user['program_studi']) ?>" class="form-control">
+                        </div>  -->
+
+
+                        <!-- Program Studi -->
+                        <div class="form-group">
+                            <label for="program_studi" class="form-label">Study Program</label>
+                            <select id="program_studi" name="program_studi" class="form-input" required>
+                                <option value="">-- Pilih Program Studi --</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -261,3 +289,52 @@
         </form>
     </div>
 </div>
+
+<script>
+    const programStudiData = {
+        'Fakultas Teknik': ['Informatika', 'Sipil', 'Elektro'],
+        'Fakultas Hukum': ['Ilmu Hukum'],
+        'Fakultas Kedokteran': ['Pendidikan Dokter'],
+        'Fakultas Psikologi': ['Psikologi'],
+        'Fakultas Ekonomi dan Bisnis': ['Manajemen', 'Akuntansi'],
+        'Fakultas Ilmu Komunikasi': ['Ilmu Komunikasi'],
+        'Fakultas Pertanian': ['Agroteknologi', 'Agribisnis']
+    };
+
+    const fakultasSelect = document.getElementById('fakultas');
+    const programStudiSelect = document.getElementById('program_studi');
+
+    function populateProgramStudi(fakultasTerpilih, selectedValue = '') {
+        programStudiSelect.innerHTML = '<option value="">-- Pilih Program Studi --</option>';
+
+        if (fakultasTerpilih && programStudiData[fakultasTerpilih]) {
+            programStudiData[fakultasTerpilih].forEach(prodi => {
+                const option = new Option(prodi, prodi);
+                if (prodi === selectedValue) {
+                    option.selected = true;
+                }
+                programStudiSelect.add(option);
+            });
+        }
+    }
+
+    // Populate saat halaman dimuat jika ada value awal
+    document.addEventListener('DOMContentLoaded', function() {
+        const fakultasAwal = fakultasSelect.value;
+        const prodiAwal = "<?= isset($user['program_studi']) ? esc($user['program_studi']) : '' ?>";
+
+        if (fakultasAwal) {
+            populateProgramStudi(fakultasAwal, prodiAwal);
+        }
+
+        // Jika fakultas sudah dipilih tapi prodi belum terisi, tetap tampilkan opsi
+        if (fakultasAwal && !prodiAwal) {
+            populateProgramStudi(fakultasAwal);
+        }
+    });
+
+    // Update saat fakultas dipilih
+    fakultasSelect.addEventListener('change', function() {
+        populateProgramStudi(this.value);
+    });
+</script>

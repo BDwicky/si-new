@@ -310,9 +310,14 @@
                         <span class="user-role"><?php echo session()->get('email'); ?></span>
                     </div>
                 </div>
+
                 <!-- Logout dropdown menu -->
                 <div class="logout-menu">
-                    <a href="<?= base_url('logout') ?>" class="logout-menu-item">
+                    <a href="<?= base_url('/') ?>" style="text-decoration: none;" class=" logout-menu-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="<?= base_url('logout') ?>" style="text-decoration: none;" class=" logout-menu-item">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>

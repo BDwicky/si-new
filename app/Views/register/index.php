@@ -321,7 +321,9 @@
 
                         <div class="form-group">
                             <label for="program_studi">Program Studi</label>
-                            <input type="text" id="program_studi" name="program_studi" class="form-input" placeholder="Program studi" required>
+                            <select id="program_studi" name="program_studi" class="form-input" required>
+                                <option value="">-- Pilih Program Studi --</option>
+                            </select>
                             <?php if (isset($validation) && $validation->hasError('program_studi')): ?>
                                 <span class="error-message"><?= $validation->getError('program_studi') ?></span>
                             <?php endif; ?>
@@ -360,5 +362,49 @@
         2025 © UKM Universitas Dr. Soetomo Surabaya
     </div>
 </body>
+
+<script>
+    const programStudiData = {
+        'Fakultas Teknik': ['Teknik Informatika', 'Teknik Sipil', 'Teknik Elektro'],
+        'Fakultas Hukum': ['Ilmu Hukum'],
+        'Fakultas Kedokteran': ['Pendidikan Dokter'],
+        'Fakultas Psikologi': ['Psikologi'],
+        'Fakultas Ekonomi dan Bisnis': ['Manajemen', 'Akuntansi'],
+        'Fakultas Ilmu Komunikasi': ['Ilmu Komunikasi'],
+        'Fakultas Pertanian': ['Agroteknologi', 'Agribisnis']
+    };
+
+    const fakultasSelect = document.getElementById('fakultas');
+    const programStudiSelect = document.getElementById('program_studi');
+
+    function populateProgramStudi(fakultasTerpilih, selectedValue = '') {
+        programStudiSelect.innerHTML = '<option value="">-- Pilih Program Studi --</option>';
+        if (programStudiData[fakultasTerpilih]) {
+            programStudiData[fakultasTerpilih].forEach(prodi => {
+                const option = document.createElement('option');
+                option.value = prodi;
+                option.textContent = prodi;
+                if (prodi === selectedValue) {
+                    option.selected = true;
+                }
+                programStudiSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Populate saat halaman dimuat jika ada value awal
+    document.addEventListener('DOMContentLoaded', function() {
+        const fakultasAwal = fakultasSelect.value;
+        const prodiAwal = "<?= esc($user['program_studi'] ?? '') ?>";
+        if (fakultasAwal) {
+            populateProgramStudi(fakultasAwal, prodiAwal);
+        }
+    });
+
+    // Update saat fakultas dipilih
+    fakultasSelect.addEventListener('change', function() {
+        populateProgramStudi(this.value);
+    });
+</script>
 
 </html>

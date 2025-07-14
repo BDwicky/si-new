@@ -9,6 +9,12 @@ class Login extends BaseController
 {
     public function index()
     {
+        $session = session();
+        // Cek apakah user sudah login
+        if ($session->get('id_user')) {
+            $session->setFlashdata('message', 'Anda sudah login');
+            return redirect()->to('dashboard/admin');
+        }
         return view('login/index');
     }
 

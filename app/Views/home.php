@@ -184,7 +184,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="text-center">
-                        <img src="<?= base_url('assets/images/hero-image.png') ?>" alt="Mahasiswa Beraktivitas" class="img-fluid rounded-3 shadow-lg" loading="lazy">
+                        <img src="<?= base_url('image\mahasiswa-aktivitas1.png') ?>" alt="Mahasiswa Beraktivitas" style="transform: scaleX(-1);">
                     </div>
                 </div>
             </div>
@@ -431,34 +431,26 @@
 
                         <div class="about-features mt-4">
                             <div class="d-flex mb-3">
-                                <div class="flex-shrink-0 text-primary me-3">
-                                    <i class="fas fa-check-circle fa-lg"></i>
-                                </div>
                                 <div>
+                                    <i class="fas fa-check-circle fa-lg text-primary"></i>
                                     <strong>Manajemen Anggota Terpadu</strong> - Sistem database anggota yang terorganisir dengan baik
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <div class="flex-shrink-0 text-primary me-3">
-                                    <i class="fas fa-check-circle fa-lg"></i>
-                                </div>
                                 <div>
+                                    <i class="fas fa-check-circle fa-lg text-primary"></i>
                                     <strong>Kalender Kegiatan</strong> - Pantau seluruh agenda UKM dalam satu platform
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <div class="flex-shrink-0 text-primary me-3">
-                                    <i class="fas fa-check-circle fa-lg"></i>
-                                </div>
                                 <div>
+                                    <i class="fas fa-check-circle fa-lg text-primary"></i>
                                     <strong>Pelaporan Digital</strong> - Laporan kegiatan dan keuangan yang transparan
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="flex-shrink-0 text-primary me-3">
-                                    <i class="fas fa-check-circle fa-lg"></i>
-                                </div>
                                 <div>
+                                    <i class="fas fa-check-circle fa-lg text-primary"></i>
                                     <strong>Komunikasi Efektif</strong> - Sistem notifikasi terintegrasi untuk seluruh anggota
                                 </div>
                             </div>
@@ -467,7 +459,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-image text-center animate-in">
-                        <img src="<?= base_url('assets/images/about-image.jpg') ?>" alt="Tentang SI UKM" class="img-fluid rounded-3 shadow" loading="lazy">
+                        <img src="<?= base_url('image/123.png') ?>" alt="Tentang SI UKM" class="img-fluid rounded-3 shadow" loading="lazy">
                         <div class="image-caption mt-3 p-3 bg-light rounded">
                             <p class="mb-0">SI UKM telah membantu lebih dari 50 UKM dalam mengelola kegiatan mereka secara digital</p>
                         </div>
