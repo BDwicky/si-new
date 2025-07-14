@@ -1,4 +1,4 @@
-<form action="<?= base_url('/super-admin/store') ?>" method="post">
+<form action="<?= base_url('dashboard/admin/store') ?>" method="post">
     <input type="text" name="username" placeholder="Username">
     <input type="text" name="name" placeholder="Nama Lengkap">
     <input type="email" name="email" placeholder="Email">

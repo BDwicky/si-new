@@ -1,4 +1,4 @@
-<head>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Sidebar - Fixed Layout */
@@ -269,9 +269,6 @@
             z-index: 100;
         }
     </style>
-</head>
-
-<body>
     <div class="sidebar">
         <div class="sidebar-content">
             <div class="logo-container">
@@ -369,4 +366,3 @@
             window.location.href = '/';
         }
     </script>
-</body>

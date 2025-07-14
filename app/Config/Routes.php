@@ -31,10 +31,10 @@ $routes->post('/register', 'Register::store');
  */
 
 // routes super admin (admin universitas)   
-$routes->get('dashboard/users', 'User::index');
-$routes->get('dashboard/users/create', 'User::create');
-$routes->post('dashboard/users/store', 'User::store');
-$routes->get('dashboard/users/edit/(:num)', 'User::edit/$1');
-$routes->post('dashboard/users/update/(:num)', 'User::update/$1');
-$routes->post('dashboard/users/delete/(:num)', 'User::delete/$1');
+$routes->get('dashboard/admin', 'User::index');
+$routes->get('dashboard/admin/create', 'User::create');
+$routes->post('dashboard/admin/store', 'User::store');
+$routes->get('dashboard/admin/edit/(:num)', 'User::edit/$1');
+$routes->post('dashboard/admin/update/(:num)', 'User::update/$1');
+$routes->post('dashboard/admin/delete/(:num)', 'User::delete/$1');
 

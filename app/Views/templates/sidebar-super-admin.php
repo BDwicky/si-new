@@ -1,200 +1,325 @@
 <style>
-          /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(180deg, #1e2a3a 0%, #0f1419 100%);
-            padding: 20px;
-            border-right: 1px solid #2d3748;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1000;
-        }
+    /* Sidebar - Fixed Layout */
+    .sidebar {
+        width: 250px;
+        background: #262b40;
+        padding: 20px;
+        border-right: 1px solid #e2e8f0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        overflow: hidden;
+        z-index: 1000;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
-            border-bottom: 1px solid #2d3748;
-        }
+    .sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .logo h1 {
-            color: #4299e1;
-            font-size: 24px;
-            font-weight: 700;
-        }
+    .logo-container {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+    }
 
-        .nav-item {
-            margin-bottom: 8px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .logo-img {
+        max-width: 150px;
+        height: auto;
+        margin-bottom: 15px;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        image-rendering: -webkit-optimize-contrast;
+    }
 
-        .nav-item:hover {
-            background: rgba(66, 153, 225, 0.1);
-            transform: translateX(5px);
-        }
+    .logo-title {
+        color: #FFFFFF;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
 
-        .nav-item.active {
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
-        }
+    .logo-subtitle {
+        color: #FFFFFF;
+        font-size: 14px;
+        margin: 0;
+    }
 
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            background: #4299e1;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
+    .nav-container {
+        flex: 1;
+        overflow-y: auto;
+    }
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: 250px;
-            padding: 20px;
-        }
+    /* Remove underline from links */
+    .nav-container a {
+        text-decoration: none;
+    }
 
-        /* Header */
-        .header {
-            background: rgba(30, 42, 58, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
+    .nav-item {
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        font-size: 16px;
+        position: relative;
+        overflow: hidden;
+        background: transparent;
+        /* Ensure background is transparent by default */
+    }
 
-        .header h2 {
-            color: #4299e1;
-            font-size: 28px;
-            font-weight: 600;
-        }
+    /* Icon styling with colors */
+    .nav-item i {
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+        font-size: 18px;
+        z-index: 1;
+    }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    /* Individual icon colors */
+    .fa-home {
+        color: #FF9E3B;
+    }
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
+    .fa-sitemap {
+        color: #6EE7B7;
+    }
 
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+    .fa-calendar-alt {
+        color: #F472B6;
+    }
 
-        .stat-card {
-            background: linear-gradient(135deg, #1e2a3a 0%, #2d3748 100%);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #2d3748;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .fa-users {
+        color: #93C5FD;
+    }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #4299e1, #3182ce);
-        }
+    .fa-user-plus {
+        color: #A78BFA;
+    }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(66, 153, 225, 0.2);
-        }
+    .nav-item:hover {
+        background: rgba(66, 153, 225, 0.2);
+    }
 
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: #4299e1;
-            margin-bottom: 8px;
-        }
+    .nav-item.active {
+        color: white;
+        font-weight: 500;
+        /* Solid blue background for active state */
+        background: #4299e1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .stat-label {
-            color: #a0aec0;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
+    /* Remove the shine effect */
+    .nav-item.active::before {
+        display: none;
+    }
 
-        .stat-change {
-            font-size: 12px;
-            color: #68d391;
-        }
-        
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: static;
-                height: auto;
-            }   
-        }
+    .nav-item.active i {
+        color: white !important;
+    }
 
-        .sidebar .nav-item .a{  
-            text-decoration: none;
-        }
+    .nav-item span {
+        position: relative;
+        z-index: 1;
+    }
 
+    .user-section-wrapper {
+        margin-top: auto;
+        padding-top: 20px;
+        background: #262b40;
+        position: relative;
+    }
+
+    .user-section {
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #FFFFFF;
+        margin-bottom: 2px;
+    }
+
+    .user-role {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Logout dropdown menu */
+    .logout-menu {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        background: #2d3748;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+
+    .user-section:hover .logout-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .logout-menu-item {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+
+    .logout-menu-item i {
+        margin-right: 10px;
+        color: #e53e3e;
+    }
+
+    .logout-menu-item:hover {
+        background: rgba(231, 74, 59, 0.2);
+    }
+
+    .page-header {
+        position: fixed;
+        top: 0;
+        left: 250px;
+        right: 0;
+        height: 60px;
+        background: white;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        z-index: 100;
+    }
+
+    .logout-btn {
+        background: #4299e1;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+    }
+
+    .logout-btn:hover {
+        background: #3182ce;
+    }
+
+    .page-footer {
+        position: fixed;
+        bottom: 0;
+        left: 250px;
+        right: 0;
+        text-align: center;
+        padding: 20px;
+        color: #718096;
+        font-size: 14px;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        z-index: 100;
+    }
 </style>
 <div class="sidebar">
-            <div class="logo">
-                <h1>Admin Panel</h1>
-            </div>
-            <nav>
-            <a href="<?= base_url('dashboard/super-admin/') ?>">
-                <div class="nav-item">
-                    <div class="nav-icon">📊</div>
-                    <span>Dashboard</span>
-                </div>
-                </a>
-                <a href="<?= base_url('dashboard/super-admin/ukm') ?>">
-                <div class="nav-item">
-                    <div class="nav-icon">📦</div>
-                    <span>UKM</span>
-                </div>
-                </a>
-                <a href="<?= base_url('dashboard/super-admin/ukm') ?>">
-                <div class="nav-item">
-                    <div class="nav-icon">📦</div>
-                    <span>Admin Ukm</span>
-                </div>
-                </a>
-            </nav>
+    <div class="sidebar-content">
+        <div class="logo-container">
+            <img src="<?= base_url('image/ukm-logo.png') ?>" alt="UKM Logo" class="logo-img" loading="lazy" decoding="async">
+            <h1 class="logo-title">Dashboard ADMIN UKM</h1>
+            <p class="logo-subtitle">Universitas DR Soetomo</p>
         </div>
 
-        <script>
-            document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-            });
+        <div class="user-section-wrapper">
+            <div class="user-section">
+                <div class="user-profile">
+                    <img src="<?= base_url('image/Profile.png') ?>" alt="Profile" class="user-avatar">
+                    <div class="user-info">
+                        <span class="user-name">David Wijaya</span>
+                        <span class="user-role">Admin UKM</span>
+                    </div>
+                </div>
+                <!-- Logout dropdown menu -->
+                <div class="logout-menu">
+                    <a href="<?= base_url('auth/logout') ?>" class="logout-menu-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header class="page-header">
+
+</header>
+
+<footer class="page-footer">
+    2025 © UKM Universitas Dr. Soetomo Surabaya
+</footer>
+
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Konfirmasi Logout',
+            text: "Anda yakin ingin keluar?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
         });
-        </script>
+    }
+</script>

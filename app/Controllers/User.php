@@ -16,14 +16,13 @@ class User extends Controller
 
     public function index()
     {
-        // $data['users'] = $this->userModel->findAll();
-        // return view('dashboard/users/index', $data);
-        return view('dashboard/users/index');
+        $data['users'] = $this->userModel->findAll();
+        return view('dashboard/admin/index', $data);
     }
 
     public function create()
     {
-        return view('dashboard/users/create');
+        return view('dashboard/admin/create');
     }
 
     public function store()
@@ -45,13 +44,13 @@ class User extends Controller
             return redirect()->back()->withInput();
         }
 
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/admin');
     }
 
     public function edit($id)
     {
         $data['user'] = $this->userModel->find($id);
-        return view('dashboard/users/edit', $data);
+        return view('dashboard/admin/edit', $data);
     }
 
     public function update($id)
@@ -74,13 +73,13 @@ class User extends Controller
         $this->userModel->update($id, $data);
 
         session()->setFlashdata('success', 'User berhasil diupdate.');
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/admin');
     }
 
     public function delete($id)
     {
         $this->userModel->delete($id);
         session()->setFlashdata('success', 'User berhasil dihapus.');
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/admin');
     }
 }
