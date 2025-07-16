@@ -222,13 +222,13 @@
 
                     <div class="form-group">
                         <label class="form-label">Phone Number</label>
-                        <input type="text" name="phone" value="<?= esc($user['phone']) ?>" class="form-control">
+                        <input type="text" name="phone" value="<?= esc($user['phone']) ?>" class="form-control" required>
                     </div>
                 </div>
 
                 <!-- Academic Information -->
                 <div class="form-section full-width">
-                    <h3 class="section-title">
+                    <h3 id="academic-info" class="section-title">
                         <i class="fas fa-graduation-cap"></i>
                         Academic Information
                     </h3>
@@ -236,7 +236,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="fakultas" class="form-label">Faculty</label>
-                            <select id="fakultas" name="fakultas" class="form-input" required>
+                            <select id="fakultas" name="fakultas" class="form-input">
                                 <option value="Fakultas Ekonomi dan Bisnis" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Ekonomi dan Bisnis') ? 'selected' : '' ?>>Fakultas Ekonomi dan Bisnis</option>
                                 <option value="Fakultas Hukum" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Hukum') ? 'selected' : '' ?>>Fakultas Hukum</option>
                                 <option value="Fakultas Teknik" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Teknik') ? 'selected' : '' ?>>Fakultas Teknik</option>
@@ -247,16 +247,11 @@
                             </select>
                         </div>
 
-                        <!-- <div class="form-group">
-                            <label class="form-label">Study Program</label>
-                            <input type="text" name="program_studi" value="<?= esc($user['program_studi']) ?>" class="form-control">
-                        </div>  -->
-
 
                         <!-- Program Studi -->
                         <div class="form-group">
                             <label for="program_studi" class="form-label">Study Program</label>
-                            <select id="program_studi" name="program_studi" class="form-input" required>
+                            <select id="program_studi" name="program_studi" class="form-input">
                                 <option value="">-- Pilih Program Studi --</option>
                             </select>
                         </div>
@@ -291,6 +286,40 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const roleSelect = document.querySelector('select[name="role_id"]');
+    
+    const nimInput = document.querySelector('input[name="nim"]');
+    const fakultasSelect = document.querySelector('select[name="fakultas"]');
+    const prodiSelect = document.querySelector('select[name="program_studi"]');
+
+    const nimField = nimInput.closest('.form-group');
+    const fakultasField = fakultasSelect.closest('.form-group');
+    const prodiField = prodiSelect.closest('.form-group');
+    const academicSection = document.getElementById('academic-info');
+
+    function toggleMahasiswaFields() {
+        const isMahasiswa = roleSelect.value === '3';
+
+        nimField.style.display = isMahasiswa ? 'block' : 'none';
+        fakultasField.style.display = isMahasiswa ? 'block' : 'none';
+        prodiField.style.display = isMahasiswa ? 'block' : 'none';
+        academicSection.style.display = isMahasiswa ? 'block' : 'none';
+
+        // Set atau hapus atribut required
+        nimInput.required = isMahasiswa;
+        fakultasSelect.required = isMahasiswa;
+        prodiSelect.required = isMahasiswa;
+    }
+
+    // Jalankan saat halaman load
+    toggleMahasiswaFields();
+
+    // Jalankan saat role berubah
+    roleSelect.addEventListener('change', toggleMahasiswaFields);
+});
+
+
     const programStudiData = {
         'Fakultas Teknik': ['Informatika', 'Sipil', 'Elektro'],
         'Fakultas Hukum': ['Ilmu Hukum'],

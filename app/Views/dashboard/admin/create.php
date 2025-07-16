@@ -111,6 +111,11 @@
         </div>
 
         <div class="form-group">
+                <label class="form-label">No. Telepon</label>
+                <input type="text" name="phone" class="form-control" placeholder="Masukkan nomor telepon" required>
+        </div>
+
+        <div class="form-group">
             <label class="form-label">Email</label>
             <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif" required>
         </div>
@@ -118,23 +123,33 @@
         <div class="user-fields" id="userFields">
             <div class="form-group">
                 <label class="form-label">NIM</label>
-                <input type="text" name="nim" class="form-control" placeholder="Masukkan NIM">
+                <input type="text" name="nim" class="form-control" placeholder="Masukkan NIM" >
             </div>
 
-            <div class="form-group">
-                <label class="form-label">No. Telepon</label>
-                <input type="text" name="phone" class="form-control" placeholder="Masukkan nomor telepon">
-            </div>
+            <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fakultas" class="form-label">Fakultas</label>
+                            <select id="fakultas" name="fakultas" class="form-input">
+                                <option value="">Fakultas</option>
+                                <option value="Fakultas Ekonomi dan Bisnis" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Ekonomi dan Bisnis') ? 'selected' : '' ?>>Fakultas Ekonomi dan Bisnis</option>
+                                <option value="Fakultas Hukum" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Hukum') ? 'selected' : '' ?>>Fakultas Hukum</option>
+                                <option value="Fakultas Teknik" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Teknik') ? 'selected' : '' ?>>Fakultas Teknik</option>
+                                <option value="Fakultas Kedokteran" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Kedokteran') ? 'selected' : '' ?>>Fakultas Kedokteran</option>
+                                <option value="Fakultas Psikologi" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Psikologi') ? 'selected' : '' ?>>Fakultas Psikologi</option>
+                                <option value="Fakultas Ilmu Komunikasi" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Ilmu Komunikasi') ? 'selected' : '' ?>>Fakultas Ilmu Komunikasi</option>
+                                <option value="Fakultas Pertanian" <?= (isset($user['fakultas']) && $user['fakultas'] == 'Fakultas Pertanian') ? 'selected' : '' ?>>Fakultas Pertanian</option>
+                            </select>
+                        </div>
 
-            <div class="form-group">
-                <label class="form-label">Fakultas</label>
-                <input type="text" name="fakultas" class="form-control" placeholder="Masukkan fakultas">
-            </div>
 
-            <div class="form-group">
-                <label class="form-label">Program Studi</label>
-                <input type="text" name="program_studi" class="form-control" placeholder="Masukkan program studi">
-            </div>
+                        <!-- Program Studi -->
+                        <div class="form-group">
+                            <label for="program_studi" class="form-label">Progam Studi</label>
+                            <select id="program_studi" name="program_studi" class="form-input">
+                                <option value="">Program Studi</option>
+                            </select>
+                        </div>
+                    </div>
         </div>
 
         <div class="form-group">
@@ -168,14 +183,97 @@
         });
 
         // Validasi form sebelum submit
-        document.querySelector('form').addEventListener('submit', function(e) {
+    document.querySelector('form').addEventListener('submit', function(e) {
             if (roleSelect.value === '3') {
                 const nim = document.querySelector('input[name="nim"]').value;
-                if (!nim) {
-                    alert('NIM wajib diisi untuk role User/Mahasiswa');
+                const fakultas = document.querySelector('input[name="fakultas"]').value;
+                const prodi = document.querySelector('input[name="program_studi"]').value;
+                if (!nim && !fakultas && !prodi) {
+                    alert('NIM, Fakultas dan Program Studi wajib diisi untuk role User(Mahasiswa)');
                     e.preventDefault();
                 }
             }
         });
+    });
+</script>
+
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+    const roleSelect = document.querySelector('select[name="role_id"]');
+    
+    const nimInput = document.querySelector('input[name="nim"]');
+    const fakultasSelect = document.querySelector('select[name="fakultas"]');
+    const prodiSelect = document.querySelector('select[name="program_studi"]');
+
+    const nimField = nimInput.closest('.form-group');
+    const fakultasField = fakultasSelect.closest('.form-group');
+    const prodiField = prodiSelect.closest('.form-group');
+
+    function toggleMahasiswaFields() {
+        const isMahasiswa = roleSelect.value === '3';
+
+        nimField.style.display = isMahasiswa ? 'block' : 'none';
+        fakultasField.style.display = isMahasiswa ? 'block' : 'none';
+        prodiField.style.display = isMahasiswa ? 'block' : 'none';
+
+        // Set atau hapus atribut required
+        nimInput.required = isMahasiswa;
+        fakultasSelect.required = isMahasiswa;
+        prodiSelect.required = isMahasiswa;
+    }
+
+    // Jalankan saat halaman load
+    toggleMahasiswaFields();
+
+    // Jalankan saat role berubah
+    roleSelect.addEventListener('change', toggleMahasiswaFields);
+});
+
+
+    const programStudiData = {
+        'Fakultas Teknik': ['Informatika', 'Sipil', 'Elektro'],
+        'Fakultas Hukum': ['Ilmu Hukum'],
+        'Fakultas Kedokteran': ['Pendidikan Dokter'],
+        'Fakultas Psikologi': ['Psikologi'],
+        'Fakultas Ekonomi dan Bisnis': ['Manajemen', 'Akuntansi'],
+        'Fakultas Ilmu Komunikasi': ['Ilmu Komunikasi'],
+        'Fakultas Pertanian': ['Agroteknologi', 'Agribisnis']
+    };
+
+    const fakultasSelect = document.getElementById('fakultas');
+    const programStudiSelect = document.getElementById('program_studi');
+
+    function populateProgramStudi(fakultasTerpilih, selectedValue = '') {
+        programStudiSelect.innerHTML = '<option value="">-- Pilih Program Studi --</option>';
+
+        if (fakultasTerpilih && programStudiData[fakultasTerpilih]) {
+            programStudiData[fakultasTerpilih].forEach(prodi => {
+                const option = new Option(prodi, prodi);
+                if (prodi === selectedValue) {
+                    option.selected = true;
+                }
+                programStudiSelect.add(option);
+            });
+        }
+    }
+
+    // Populate saat halaman dimuat jika ada value awal
+    document.addEventListener('DOMContentLoaded', function() {
+        const fakultasAwal = fakultasSelect.value;
+        const prodiAwal = "<?= isset($user['program_studi']) ? esc($user['program_studi']) : '' ?>";
+
+        if (fakultasAwal) {
+            populateProgramStudi(fakultasAwal, prodiAwal);
+        }
+
+        // Jika fakultas sudah dipilih tapi prodi belum terisi, tetap tampilkan opsi
+        if (fakultasAwal && !prodiAwal) {
+            populateProgramStudi(fakultasAwal);
+        }
+    });
+
+    // Update saat fakultas dipilih
+    fakultasSelect.addEventListener('change', function() {
+        populateProgramStudi(this.value);
     });
 </script>

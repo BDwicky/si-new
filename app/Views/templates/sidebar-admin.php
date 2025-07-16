@@ -279,43 +279,43 @@
 
             <div class="nav-container">
                 <nav>
-                    <a href="<?= base_url('dashboard/admin') ?>" style="text-decoration: none;">
+                    <!-- <a href="<?= base_url('dashboard/admin') ?>" style="text-decoration: none;">
                         <div class="nav-item <?= ($active_menu == 'dashboard/admin') ? 'active' : '' ?>">
                             <i class="fas fa-home"></i>
                             <span>Home Dashboard</span>
                         </div>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= base_url('dashboard/admin/struktur-ukm') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin/struktur-ukm') ? 'active' : '' ?>">
+                    <a href="<?= base_url('dashboard/ukm') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/struktur-ukm') ? 'active' : '' ?>">
                             <i class="fas fa-sitemap"></i>
                             <span>Struktur UKM</span>
                         </div>
                     </a>
 
-                    <a href="<?= base_url('dashboard/admin/kalender') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin/kalender') ? 'active' : '' ?>">
+                    <a href="<?= base_url('dashboard/ukm/kalender') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/kalender') ? 'active' : '' ?>">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Kalender Agenda</span>
                         </div>
                     </a>
 
-                    <a href="<?= base_url('dashboard/admin/list-anggota') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin/anggota') ? 'active' : '' ?>">
+                    <a href="<?= base_url('dashboard/ukm/list-anggota') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/anggota') ? 'active' : '' ?>">
                             <i class="fas fa-users"></i>
                             <span>List Anggota UKM</span>
                         </div>
                     </a>
 
-                    <a href="<?= base_url('dashboard/admin/pendaftar') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin/pendaftar') ? 'active' : '' ?>">
+                    <a href="<?= base_url('dashboard/ukm/pendaftar') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/pendaftar') ? 'active' : '' ?>">
                             <i class="fas fa-user-plus"></i>
                             <span>List Pendaftar Anggota</span>
                         </div>
                     </a>
 
-                    <a href="<?= base_url('dashboard/admin/tempt') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin/tempt') ? 'active' : '' ?>">
+                    <a href="<?= base_url('dashboard/ukm/tempt') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/tempt') ? 'active' : '' ?>">
                             <i class="fas fa-cog"></i>
                             <span>Temporary Page</span>
                         </div>
