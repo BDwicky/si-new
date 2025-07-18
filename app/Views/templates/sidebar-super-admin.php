@@ -291,7 +291,7 @@
                 </a>
                 <a href="<?= base_url('dashboard/admin/ukm') ?>" style="text-decoration: none;">
                     <div class="nav-item ">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-clipboard-list"></i>
                         <span>Daftar Ukm</span>
                     </div>
                 </a>
