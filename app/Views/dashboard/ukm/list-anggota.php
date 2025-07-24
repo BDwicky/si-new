@@ -287,147 +287,45 @@
         <table class="members-table">
             <thead>
                 <tr>
-                    <th width="50">No</th>
-                    <th>Nama Lengkap</th>
+                    <th>No</th>
+                    <th>Nama</th>
                     <th>NIM</th>
+                    <th>Fakultas</th>
                     <th>Program Studi</th>
-                    <th>Divisi</th>
-                    <th>Status</th>
+                    <th>Jabatan</th>
                     <th>Tanggal Bergabung</th>
                     <th width="50">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">JD</div>
-                            John Doe
-                        </div>
-                    </td>
-                    <td>20210710001</td>
-                    <td>Teknik Informatika</td>
-                    <td>Humas</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>12/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
+                    <?php $no = 1;
+                    foreach ($anggota as $a) : ?>
+                        <td>1</td>
+                        <td>
+                            <div class="member-name">
+                                <?= esc($a['nama_user']) ?>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">JS</div>
-                            Jane Smith
-                        </div>
-                    </td>
-                    <td>20210710002</td>
-                    <td>Sistem Informasi</td>
-                    <td>Kaderisasi</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>15/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
+                        </td>
+                        <td><?= esc($a['nim']) ?></td>
+                        <td><?= esc($a['fakultas']) ?></td>
+                        <td><?= esc($a['program_studi']) ?></td>
+                        <td><?= esc(ucfirst($a['role_in_ukm'])) ?></td>
+                        <td><?= date('d M Y', strtotime($a['created_at'])) ?></td>
+                        <td>
+                            <div class="action-dropdown">
+                                <button class="dropdown-btn">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#"><i class="fas fa-eye"></i> Detail</a>
+                                    <a href="#"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="#"><i class="fas fa-trash"></i> Hapus</a>
+                                </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">RJ</div>
-                            Robert Johnson
-                        </div>
-                    </td>
-                    <td>20210710003</td>
-                    <td>Teknik Elektro</td>
-                    <td>Dana</td>
-                    <td><span class="status-badge status-inactive">Tidak Aktif</span></td>
-                    <td>20/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">AM</div>
-                            Alice Miller
-                        </div>
-                    </td>
-                    <td>20210710004</td>
-                    <td>Manajemen</td>
-                    <td>Sarana & Perlengkapan</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>25/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">TW</div>
-                            Thomas Wilson
-                        </div>
-                    </td>
-                    <td>20210710005</td>
-                    <td>Akuntansi</td>
-                    <td>Humas</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>01/09/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
 

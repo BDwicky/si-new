@@ -332,7 +332,7 @@
                     <tr>
                         <th width="40"><input type="checkbox" class="select-checkbox"></th>
                         <th>Nama Pendaftar</th>
-                        <th>UKM Tujuan</th>
+                        <th>Fakultas</th>
                         <th>Program Studi</th>
                         <th>Tanggal Daftar</th>
                         <th>Status</th>
@@ -340,133 +340,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">JD</div>
-                                <div>
-                                    <div class="applicant-name">John Doe</div>
-                                    <div class="applicant-nim">20210710001</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Futsal</td>
-                        <td>Teknik Informatika</td>
-                        <td>12/08/2023</td>
-                        <td><span class="status-badge status-pending">Menunggu</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-approve" title="Setujui">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button class="action-btn btn-reject" title="Tolak">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">AS</div>
-                                <div>
-                                    <div class="applicant-name">Alice Smith</div>
-                                    <div class="applicant-nim">20210710002</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Pencak Silat</td>
-                        <td>Sistem Informasi</td>
-                        <td>15/08/2023</td>
-                        <td><span class="status-badge status-approved">Disetujui</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">RJ</div>
-                                <div>
-                                    <div class="applicant-name">Robert Johnson</div>
-                                    <div class="applicant-nim">20210710003</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Bola Volly</td>
-                        <td>Teknik Elektro</td>
-                        <td>18/08/2023</td>
-                        <td><span class="status-badge status-rejected">Ditolak</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">MB</div>
-                                <div>
-                                    <div class="applicant-name">Maria Brown</div>
-                                    <div class="applicant-nim">20210710004</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Catur</td>
-                        <td>Manajemen</td>
-                        <td>20/08/2023</td>
-                        <td><span class="status-badge status-pending">Menunggu</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-approve" title="Setujui">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button class="action-btn btn-reject" title="Tolak">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">TW</div>
-                                <div>
-                                    <div class="applicant-name">Thomas Wilson</div>
-                                    <div class="applicant-nim">20210710005</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Futsal</td>
-                        <td>Akuntansi</td>
-                        <td>22/08/2023</td>
-                        <td><span class="status-badge status-approved">Disetujui</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php if (!empty($anggota)) : ?>
+                        <?php foreach ($anggota as $row) : ?>
+                            <tr>
+                                <td><input type="checkbox" class="select-checkbox"></td>
+                                <td>
+                                    <div class="applicant-info">
+                                        <div class="applicant-avatar">
+                                            <?= strtoupper(substr($row['nama_user'], 0, 1)) ?>
+                                        </div>
+                                        <div>
+                                            <div class="applicant-name"><?= esc($row['nama_user']) ?></div>
+                                            <div class="applicant-nim"><?= esc($row['nim']) ?></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><?= esc($row['fakultas']) ?></td>
+                                <td><?= esc($row['program_studi']) ?></td>
+                                <td><?= date('d/m/Y', strtotime($row['created_at'])) ?></td>
+                                <td>
+                                    <span class="status-badge status-pending">
+                                        Menunggu
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn btn-approve" title="Setujui">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="action-btn btn-reject" title="Tolak">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="action-btn btn-view" title="Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">Tidak ada pendaftar ditemukan.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
 
@@ -483,8 +399,6 @@
                     <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-
-            <h1>KONTOOOOOOOOOOOOOOOOL</h1>
         </div>
     </div>
 
