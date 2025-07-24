@@ -1,9 +1,22 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\UserModel;
+use App\Models\UkmModel;
+use CodeIgniter\Controller;
 
 class Ukm extends BaseController
-{
+{   
+    protected $userModel;
+    protected $ukmModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+        $this->ukmModel = new UkmModel();
+    }
+
+
     public function daftarUkm()
     {
         $data = [

@@ -40,7 +40,8 @@
             <tr>
                 <th>No</th>
                 <th>Nama UKM</th>
-                <th>dibentuk</th>
+                <th>Jumlah Anggota</th>
+                <th>Dibentuk</th>
             </tr>
         </thead>
         <tbody id="ukmTable">
@@ -49,12 +50,13 @@
                     <tr>
                         <td><?= $no++ ?></td>
                         <td><?= esc($ukm['name']) ?></td>
+                        <td><?= esc($ukm['jumlah_anggota']) ?></td>
                         <td><?= date('d M Y', strtotime($ukm['created_at'])) ?></td>
                     </tr>
                 <?php endforeach ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="3" align="center">Data belum ada.</td>
+                    <td colspan="4" align="center">Data belum ada.</td>
                 </tr>
             <?php endif ?>
         </tbody>

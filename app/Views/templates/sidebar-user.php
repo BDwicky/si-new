@@ -269,24 +269,39 @@
             z-index: 100;
         }
     </style>
+
     <div class="sidebar">
-        <div class="sidebar-content">
-            <div class="logo-container">
-                <img src="<?= base_url('image/ukm-logo.png') ?>" alt="UKM Logo" class="logo-img" loading="lazy" decoding="async">
-                <h1 class="logo-title">Dashboard UKM</h1>
-                <p class="logo-subtitle">Universitas DR Soetomo</p>
-            </div>
+    <div class="sidebar-content">
+        <div class="logo-container">
+            <img src="<?= base_url('image/ukm-logo.png') ?>" alt="UKM Logo" class="logo-img" loading="lazy" decoding="async">
+            <h1 class="logo-title">Dashboard UKM</h1>
+            <p class="logo-subtitle">Universitas DR Soetomo</p>
+        </div>
 
-            <div class="nav-container">
-                <nav>
-                    <!-- <a href="<?= base_url('dashboard/admin') ?>" style="text-decoration: none;">
-                        <div class="nav-item <?= ($active_menu == 'dashboard/admin') ? 'active' : '' ?>">
-                            <i class="fas fa-home"></i>
-                            <span>Home Dashboard</span>
-                        </div>
-                    </a> -->
+        <div class="nav-container">
+            <nav>
+                <!-- UKM Saya -->
+                <a href="<?= base_url('dashboard/user') ?>" style="text-decoration: none;">
+                    <div class="nav-item <?= ($active_menu == 'UKM Saya') ? 'active' : '' ?>">
+                        <i class="fas fa-home"></i>
+                        <span>UKM Saya</span>
+                    </div>
+                </a>
 
-                    <a href="<?= base_url('dashboard/ukm') ?>" style="text-decoration: none;">
+                <?php
+                // Periksa apakah user punya UKM dengan status diterima
+                $hasAcceptedUKM = false;
+                foreach ($ukms as $ukm) {
+                    if ($ukm['status'] === 'diterima') {
+                        $hasAcceptedUKM = true;
+                        break;
+                    }
+                }
+                ?>
+
+                <?php if ($hasAcceptedUKM): ?>
+                    <!-- Dropdown Menu Hanya Jika Sudah Memiliki UKM yang Diterima -->
+                    <a href="<?= base_url('dashboard/ukm/struktur-ukm') ?>" style="text-decoration: none;">
                         <div class="nav-item <?= ($active_menu == 'dashboard/ukm/struktur-ukm') ? 'active' : '' ?>">
                             <i class="fas fa-sitemap"></i>
                             <span>Struktur UKM</span>
@@ -320,36 +335,36 @@
                             <span>Temporary Page</span>
                         </div>
                     </a>
+                <?php endif; ?>
+            </nav>
+        </div>
 
-                </nav>
-            </div>
-
-            <div class="user-section-wrapper">
+        <div class="user-section-wrapper">
             <div class="user-section">
                 <div class="user-profile">
                     <img src="<?= base_url('image/Profile.png') ?>" alt="Profile" class="user-avatar">
                     <div class="user-info">
-                        <span class="user-name"><?php echo session()->get('name'); ?></span>
-                        <span class="user-role"><?php echo session()->get('email'); ?></span>
+                        <span class="user-name"><?= session()->get('name'); ?></span>
+                        <span class="user-role"><?= session()->get('email'); ?></span>
                     </div>
                 </div>
 
-                <!-- Logout dropdown menu -->
+                <!-- Logout menu -->
                 <div class="logout-menu">
-                    <a href="<?= base_url('/') ?>" style="text-decoration: none;" class=" logout-menu-item">
+                    <a href="<?= base_url('/') ?>" style="text-decoration: none;" class="logout-menu-item">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
-                    <a href="<?= base_url('logout') ?>" style="text-decoration: none;" class=" logout-menu-item">
+                    <a href="<?= base_url('logout') ?>" style="text-decoration: none;" class="logout-menu-item">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>
-
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
+
 
     <header class="page-header">
 

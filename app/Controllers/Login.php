@@ -13,6 +13,15 @@ class Login extends BaseController
         // Cek apakah user sudah login
         if ($session->get('id_user')) {
             $session->setFlashdata('message', 'Anda sudah login');
+            
+            if ($session->get('role') == 2) {
+                return redirect()->to('dashboard/ukm');
+            }
+
+            if ($session->get('role') == 3) {
+                return redirect()->to('dashboard/user');
+            }
+
             return redirect()->to('dashboard/admin');
         }
         return view('login/index');

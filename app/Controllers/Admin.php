@@ -23,11 +23,24 @@ class Admin extends Controller
         return view('dashboard/admin/index', $data);
     }
     
-    public function listUkm()
-    {
-        $data['ukms'] = $this->ukmModel->findAll();
-        return view('dashboard/admin/ukm', $data);
-    }
+    // public function listUkm()
+    // {
+    //     $data['ukms'] = $this->ukmModel->findAll();
+    //     return view('dashboard/admin/ukm', $data);
+    // }
+
+public function listUkm()
+{
+    $data['ukms'] = $this->ukmModel
+        ->select('ukm.id, ukm.name, ukm.created_at, COUNT(ukm_members.id) as jumlah_anggota')
+        ->join('ukm_members', "ukm_members.ukm_id = ukm.id AND ukm_members.status = 'approved'", 'left')
+        ->groupBy('ukm.id')
+        ->findAll();
+
+    return view('dashboard/admin/ukm', $data);
+}
+
+
 
     public function create()
     {

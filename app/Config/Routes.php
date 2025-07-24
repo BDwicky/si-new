@@ -48,5 +48,6 @@ $routes->get('dashboard/ukm/list-anggota', 'Ukm::listAnggota');
 $routes->get('dashboard/ukm/pendaftar', 'Ukm::pendaftar');
 $routes->get('dashboard/ukm/tempt', 'Ukm::tempt');
 
-
+// routes user
+$routes->get('dashboard/user', 'User::index');
 
