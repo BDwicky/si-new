@@ -1,7 +1,12 @@
 <?= $this->include('templates/sidebar-super-admin') ?>
 <style>
-    table {
+    .table-container table {
+        border-collapse: collapse;
         width: 100%;
+    }
+
+    table {
+        /* width: 100%; */
         border-collapse: collapse;
         margin-top: 50px;
         padding: 30px;
@@ -14,7 +19,8 @@
         color: white;
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 15px;
         border: 1px solid #ddd;
         text-align: left;
@@ -29,8 +35,15 @@
     }
 
     .table-container {
-        overflow-x: auto;
-        margin-bottom: 30px;
+        padding-top: 30px;
+        /* margin-left: 300px; */
+        margin-right: 20px;
+    }
+
+    .table-container th {
+        background-color: #1e2a3a;
+        color: white;
+        /* font-style: italic; */
     }
 </style>
 
@@ -46,7 +59,8 @@
         </thead>
         <tbody id="ukmTable">
             <?php if (!empty($ukms)) : ?>
-                <?php $no = 1; foreach ($ukms as $ukm) : ?>
+                <?php $no = 1;
+                foreach ($ukms as $ukm) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
                         <td><?= esc($ukm['name']) ?></td>

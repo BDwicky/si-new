@@ -17,11 +17,13 @@
     .table-container td {
         border: 1px solid #ddd;
         padding: 8px;
+        ;
     }
 
     .table-container th {
         background-color: #1e2a3a;
         color: white;
+        /* font-style: italic; */
     }
 
     .filter-container {
