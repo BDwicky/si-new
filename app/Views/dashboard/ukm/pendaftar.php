@@ -76,21 +76,7 @@
             border: none;
         }
 
-        .registrations-table-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            margin-top: 50px;
-        }
 
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 20px;
-            border-bottom: 1px solid #edf2f7;
-            align-items: center;
-        }
 
         .bulk-actions {
             display: flex;
@@ -122,34 +108,55 @@
             color: #a0aec0;
         }
 
+        .registrations-table-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-top: 50px;
+            /* margin-left: 300px; */
+            /* opsional, kalau layout pakai sidebar */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #edf2f7;
+            align-items: center;
+        }
+
         .registrations-table {
             width: 100%;
             border-collapse: collapse;
         }
 
+        .registrations-table thead {
+            background-color: #1e2a3a;
+            color: white;
+        }
+
         .registrations-table th {
-            background-color: #f8fafc;
-            color: #4a5568;
-            padding: 15px 20px;
+            padding: 12px 15px;
             text-align: left;
             font-weight: 600;
             font-size: 14px;
-            border-bottom: 1px solid #edf2f7;
         }
 
         .registrations-table td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #edf2f7;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             vertical-align: middle;
             font-size: 14px;
         }
 
-        .registrations-table tr:last-child td {
-            border-bottom: none;
+        .registrations-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
-        .registrations-table tr:hover {
-            background-color: #f8fafc;
+        .registrations-table tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         .select-checkbox {

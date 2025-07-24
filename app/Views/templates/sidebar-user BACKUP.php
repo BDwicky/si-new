@@ -267,18 +267,6 @@
         border-top: 1px solid #e2e8f0;
         z-index: 100;
     }
-
-    .ukm-group {
-        margin-bottom: 20px;
-    }
-
-    .ukm-header {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 5px;
-        padding-left: 20px;
-    }
 </style>
 
 <div class="sidebar">
@@ -291,6 +279,7 @@
 
         <div class="nav-container">
             <nav>
+                <!-- UKM Saya -->
                 <a href="<?= base_url('dashboard/user') ?>" style="text-decoration: none;">
                     <div class="nav-item <?= ($active_menu == 'UKM Saya') ? 'active' : '' ?>">
                         <i class="fas fa-home"></i>
@@ -298,29 +287,56 @@
                     </div>
                 </a>
 
-                <!-- Loop UKM yang approved -->
-                <?php if (!empty($acceptedUKMs)) : ?>
-                    <?php foreach ($acceptedUKMs as $ukm) : ?>
-                        <div class="ukm-group">
-                            <div class="ukm-header"><?= esc($ukm['name']) ?></div>
-                            <a href="<?= base_url('dashboard/ukm/struktur-ukm/' . $ukm['id']) ?>">
-                                <div class="nav-item">
-                                    <i class="fas fa-sitemap"></i>
-                                    <span>Struktur UKM</span>
-                                </div>
-                            </a>
-                            <a href="<?= base_url('dashboard/ukm/kalender/' . $ukm['id']) ?>">
-                                <div class="nav-item">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Kalender Agenda</span>
-                                </div>
-                            </a>
+                <?php
+                // Periksa apakah user punya UKM dengan status diterima
+                $hasAcceptedUKM = false;
+                foreach ($ukms as $ukm) {
+                    if ($ukm['status'] === 'approved') {
+                        $hasAcceptedUKM = true;
+                        break;
+                    }
+                }
+                ?>
+
+                <?php if ($hasAcceptedUKM): ?>
+                    <!-- Dropdown Menu Hanya Jika Sudah Memiliki UKM yang Diterima -->
+                    <a href="<?= base_url('dashboard/ukm/struktur-ukm') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/struktur-ukm') ? 'active' : '' ?>">
+                            <i class="fas fa-sitemap"></i>
+                            <span>Struktur UKM</span>
                         </div>
-                    <?php endforeach; ?>
+                    </a>
+
+                    <a href="<?= base_url('dashboard/ukm/kalender') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/kalender') ? 'active' : '' ?>">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Kalender Agenda</span>
+                        </div>
+                    </a>
+
+                    <a href="<?= base_url('dashboard/ukm/list-anggota') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/anggota') ? 'active' : '' ?>">
+                            <i class="fas fa-users"></i>
+                            <span>List Anggota UKM</span>
+                        </div>
+                    </a>
+
+                    <a href="<?= base_url('dashboard/ukm/pendaftar') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/pendaftar') ? 'active' : '' ?>">
+                            <i class="fas fa-user-plus"></i>
+                            <span>List Pendaftar Anggota</span>
+                        </div>
+                    </a>
+
+                    <a href="<?= base_url('dashboard/ukm/tempt') ?>" style="text-decoration: none;">
+                        <div class="nav-item <?= ($active_menu == 'dashboard/ukm/tempt') ? 'active' : '' ?>">
+                            <i class="fas fa-cog"></i>
+                            <span>Temporary Page</span>
+                        </div>
+                    </a>
                 <?php endif; ?>
             </nav>
         </div>
-
 
         <div class="user-section-wrapper">
             <div class="user-section">

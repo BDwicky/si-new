@@ -115,13 +115,30 @@
       background: #999;
     }
 
-    .alert {
-      padding: 1rem;
-      background: #d9edf7;
+    .alert-card {
+      width: 300px;
+      height: 450px;
+      background: #e6f4f9;
+      /* Biru lembut */
       color: #31708f;
-      border-radius: 8px;
-      margin-top: 1rem;
+      border-radius: 12px;
+      border: 1px solid #4299e1;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      padding: 2rem;
+
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
     }
+
+
 
     .page-header {
       position: fixed;
@@ -161,8 +178,7 @@
                 <span class="badge bg-warning text-dark">Pending</span>
               <?php elseif ($ukm['status'] == 'rejected') : ?>
                 <span class="badge bg-danger">Ditolak</span>
-              <?php else : ?>
-                <span class="badge bg-secondary">Belum mendaftar</span>
+
               <?php endif; ?>
 
               <!-- Ikon UKM -->
@@ -173,12 +189,13 @@
                 } elseif (strpos(strtolower($ukm['name']), 'futsal') !== false) {
                   echo '<img src="' . base_url('image\ukm\futsal.png') . '" alt="Futsal" />';
                 } elseif (strpos(strtolower($ukm['name']), 'volly') !== false) {
-                  echo '<img src="' . base_url('image\ukm\olly.png') . '" alt="Volly" />';
+                  echo '<img src="' . base_url('image\ukm\volly.png') . '" alt="Volly" />';
                 } elseif (strpos(strtolower($ukm['name']), 'catur') !== false) {
                   echo '<img src="' . base_url('image\ukm\catur.png') . '" alt="Catur" />';
                 } else {
                   echo '<img src="' . base_url('image\ukm\default.png') . '" alt="UKM" />';
                 }
+
                 ?>
               </div>
 
@@ -191,7 +208,11 @@
       <?php endforeach; ?>
     </div>
   <?php else : ?>
-    <div class="alert alert-info">Anda belum mengikuti UKM mana pun.</div>
+    <div class="alert-card">
+      <i class="fas fa-info-circle" style="font-size: 40px; color: #4299e1; margin-bottom: 1rem;"></i>
+      Anda belum mengikuti UKM mana pun.
+    </div>
+
   <?php endif; ?>
 
 </body>

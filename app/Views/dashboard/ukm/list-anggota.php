@@ -105,31 +105,37 @@
             width: 100%;
             border-collapse: collapse;
             background-color: white;
+            /* margin-left: 300px; */
+            margin-top: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             overflow: hidden;
         }
 
-        .members-table th {
-            background-color: #2d3748;
+        .members-table thead {
+            background-color: #1e2a3a;
             color: white;
-            padding: 15px;
+        }
+
+        .members-table th {
+            padding: 12px 15px;
             text-align: left;
             font-weight: 600;
         }
 
         .members-table td {
-            padding: 15px;
-            border-bottom: 1px solid #edf2f7;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             vertical-align: middle;
         }
 
-        .members-table tr:last-child td {
-            border-bottom: none;
+        .members-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
-        .members-table tr:hover {
-            background-color: #f8fafc;
+        .members-table tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         .member-avatar {

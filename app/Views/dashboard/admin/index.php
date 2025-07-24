@@ -11,19 +11,28 @@
     .table-container table {
         border-collapse: collapse;
         width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 50px;
     }
 
     .table-container th,
     .table-container td {
         border: 1px solid #ddd;
-        padding: 8px;
-        ;
+        padding: 12px 15px;
+        text-align: left;
     }
 
-    .table-container th {
+    .table-container thead {
         background-color: #1e2a3a;
         color: white;
-        /* font-style: italic; */
+    }
+
+    .table-container tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table-container tbody tr:hover {
+        background-color: #f1f1f1;
     }
 
     .filter-container {
@@ -79,6 +88,7 @@
         gap: 8px;
         box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
         text-decoration: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .btn-add-user:hover {
