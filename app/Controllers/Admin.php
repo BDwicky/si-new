@@ -22,23 +22,23 @@ class Admin extends Controller
         $data['users'] = $this->userModel->findAll();
         return view('dashboard/admin/index', $data);
     }
-    
+
     // public function listUkm()
     // {
     //     $data['ukms'] = $this->ukmModel->findAll();
     //     return view('dashboard/admin/ukm', $data);
     // }
 
-public function listUkm()
-{
-    $data['ukms'] = $this->ukmModel
-        ->select('ukm.id, ukm.name, ukm.created_at, COUNT(ukm_members.id) as jumlah_anggota')
-        ->join('ukm_members', "ukm_members.ukm_id = ukm.id AND ukm_members.status = 'approved'", 'left')
-        ->groupBy('ukm.id')
-        ->findAll();
+    public function listUkm()
+    {
+        $data['ukms'] = $this->ukmModel
+            ->select('ukm.id, ukm.name, ukm.created_at, COUNT(ukm_members.id) as jumlah_anggota')
+            ->join('ukm_members', "ukm_members.ukm_id = ukm.id AND ukm_members.status = 'approved'", 'left')
+            ->groupBy('ukm.id')
+            ->findAll();
 
-    return view('dashboard/admin/ukm', $data);
-}
+        return view('dashboard/admin/ukm', $data);
+    }
 
 
 
@@ -76,7 +76,9 @@ public function listUkm()
             // Jika role UKM, tambahkan data ke tabel ukm
             if ($role_id == '2') { // asumsi 2 = UKM
                 $this->ukmModel->insert([
-                    'name' => $this->request->getPost('name'), // atau bisa pakai field ukm_name khusus
+                    'name' => $data['name'], // atau bisa pakai field ukm_name khusus
+                    'deskripsi' => $this->request->getPost('deskripsi'), // default jika kosong
+                    'kategori' => $this->request->getPost('kategori'),
                     'user_id' => $userId
                 ]);
             }
@@ -108,39 +110,39 @@ public function listUkm()
     }
 
     public function update($id)
-{
-    $role_id = $this->request->getPost('role_id');
+    {
+        $role_id = $this->request->getPost('role_id');
 
-    // Data dasar
-    $data = [
-        'username' => $this->request->getPost('username'),
-        'name' => $this->request->getPost('name'),
-        'email' => $this->request->getPost('email'),
-        'phone' => $this->request->getPost('phone'),
-        'role_id' => $role_id,
-    ];
+        // Data dasar
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'phone' => $this->request->getPost('phone'),
+            'role_id' => $role_id,
+        ];
 
-    // Update password jika diisi
-    if ($this->request->getPost('password')) {
-        $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+        // Update password jika diisi
+        if ($this->request->getPost('password')) {
+            $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+        }
+
+        // Hanya isi data mahasiswa jika role = 3
+        if ($role_id == '3') {
+            $data['nim'] = $this->request->getPost('nim');
+            $data['fakultas'] = $this->request->getPost('fakultas');
+            $data['program_studi'] = $this->request->getPost('program_studi');
+        } else {
+            // Kalau bukan mahasiswa, kosongkan supaya tidak menyebabkan duplikat NIM
+            $data['nim'] = null;
+            $data['fakultas'] = null;
+            $data['program_studi'] = null;
+        }
+
+        $this->userModel->update($id, $data);
+
+        return redirect()->to(base_url('dashboard/admin'))->with('success', 'User berhasil diupdate.');
     }
-
-    // Hanya isi data mahasiswa jika role = 3
-    if ($role_id == '3') {
-        $data['nim'] = $this->request->getPost('nim');
-        $data['fakultas'] = $this->request->getPost('fakultas');
-        $data['program_studi'] = $this->request->getPost('program_studi');
-    } else {
-        // Kalau bukan mahasiswa, kosongkan supaya tidak menyebabkan duplikat NIM
-        $data['nim'] = null;
-        $data['fakultas'] = null;
-        $data['program_studi'] = null;
-    }
-
-    $this->userModel->update($id, $data);
-
-    return redirect()->to(base_url('dashboard/admin'))->with('success', 'User berhasil diupdate.');
-}
 
 
 

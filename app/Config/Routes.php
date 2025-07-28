@@ -28,7 +28,7 @@ $routes->post('/register', 'Register::store');
 
 /**
  * PRIVATE ROUTES
-*/
+ */
 
 // routes super admin (admin universitas) 
 $routes->group('dashboard/admin', ['filter' => 'rolecheck'], function ($routes) {
@@ -50,4 +50,5 @@ $routes->get('dashboard/ukm/tempt', 'Ukm::tempt');
 
 // routes user
 $routes->get('dashboard/user', 'User::index');
-
+$routes->get('dashboard/user/edit-profile', 'User::editProfile');
+$routes->post('dashboard/user/update-profile', 'User::updateProfile');

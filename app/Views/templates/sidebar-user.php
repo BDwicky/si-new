@@ -279,6 +279,12 @@
         margin-bottom: 5px;
         padding-left: 20px;
     }
+
+    .nav-item.active {
+        background-color: #4070f4;
+        color: white;
+        border-radius: 5px;
+    }
 </style>
 
 <div class="sidebar">
@@ -295,6 +301,13 @@
                     <div class="nav-item <?= ($active_menu == 'UKM Saya') ? 'active' : '' ?>">
                         <i class="fas fa-home"></i>
                         <span>UKM Saya</span>
+                    </div>
+                </a>
+
+                <a href="<?= base_url('dashboard/user/edit-profile') ?>" style="text-decoration: none;">
+                    <div class="nav-item <?= ($active_menu == 'Edit Profil') ? 'active' : '' ?>">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Edit Profil</span>
                     </div>
                 </a>
 

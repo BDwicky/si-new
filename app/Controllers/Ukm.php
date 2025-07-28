@@ -22,10 +22,24 @@ class Ukm extends BaseController
 
     public function daftarUkm()
     {
+        $ukms = $this->db->table('ukm')
+            ->get()
+            ->getResultArray();
+
+        // Hitung jumlah anggota approved untuk setiap UKM
+        foreach ($ukms as &$ukm) {
+            $ukm['jumlah_anggota'] = $this->db->table('ukm_members')
+                ->where('ukm_id', $ukm['id'])
+                ->where('status', 'approved')
+                ->countAllResults();
+        }
+
         $data = [
             'title' => 'Daftar UKM',
-            'active_menu' => 'daftar-ukm'
+            'active_menu' => 'daftar-ukm',
+            'ukms' => $ukms // <--- Tambahkan ini
         ];
+
         return view('dashboard/admin/ukm', $data);
     }
 
@@ -82,10 +96,6 @@ class Ukm extends BaseController
 
         return view('dashboard/ukm/list-anggota', $data);
     }
-
-
-
-
 
 
     public function pendaftar()

@@ -127,6 +127,26 @@
             <input type="text" name="name" class="form-control" placeholder="Masukkan nama lengkap" required>
         </div>
 
+        <div id="ukmFields" class="user-fields">
+
+            <div class="form-group">
+                <label class="form-label">Deskripsi UKM</label>
+                <textarea name="deskripsi" class="form-control" placeholder="Masukkan deskripsi UKM"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Kategori UKM</label>
+                <select name="kategori" class="form-select">
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="olahraga">Olahraga</option>
+                    <option value="seni">Seni</option>
+                    <option value="ilmiah">Ilmiah</option>
+                    <option value="kerohanian">Kerohanian</option>
+                    <option value="lainnya">Lainnya</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="form-label">No. Telepon</label>
             <input type="text" name="phone" class="form-control" placeholder="Masukkan nomor telepon" required>
@@ -190,27 +210,31 @@
     document.addEventListener('DOMContentLoaded', function() {
         const roleSelect = document.getElementById('role_id');
         const userFields = document.getElementById('userFields');
+        const ukmFields = document.getElementById('ukmFields');
 
-        roleSelect.addEventListener('change', function() {
-            if (this.value === '3') {
+        function toggleFields() {
+            const role = roleSelect.value;
+
+            // Mahasiswa
+            if (role === '3') {
                 userFields.classList.add('show');
             } else {
                 userFields.classList.remove('show');
             }
-        });
 
-        // Validasi form sebelum submit
-        document.querySelector('form').addEventListener('submit', function(e) {
-            if (roleSelect.value === '3') {
-                const nim = document.querySelector('input[name="nim"]').value;
-                const fakultas = document.querySelector('input[name="fakultas"]').value;
-                const prodi = document.querySelector('input[name="program_studi"]').value;
-                if (!nim && !fakultas && !prodi) {
-                    alert('NIM, Fakultas dan Program Studi wajib diisi untuk role User(Mahasiswa)');
-                    e.preventDefault();
-                }
+            // UKM
+            if (role === '2') {
+                ukmFields.classList.add('show');
+            } else {
+                ukmFields.classList.remove('show');
             }
-        });
+        }
+
+        // Jalankan saat load
+        toggleFields();
+
+        // Saat role berubah
+        roleSelect.addEventListener('change', toggleFields);
     });
 </script>
 
