@@ -24,25 +24,27 @@
             padding: 30px;
         }
 
-         .badge {
-        display: inline-block;
-        padding: 5px 12px;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 20px;
-        text-align: center;
-        white-space: nowrap;
-    }
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-align: center;
+            white-space: nowrap;
+        }
 
-    .badge-aktif {
-        background-color: #c6f6d5; /* Hijau lembut */
-        color: #22543d;
-    }
+        .badge-aktif {
+            background-color: #c6f6d5;
+            /* Hijau lembut */
+            color: #22543d;
+        }
 
-    .badge-nonaktif {
-        background-color: #fed7d7; /* Merah lembut */
-        color: #822727;
-    }
+        .badge-nonaktif {
+            background-color: #fed7d7;
+            /* Merah lembut */
+            color: #822727;
+        }
 
         .page-header {
             display: flex;
@@ -132,6 +134,8 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             overflow: hidden;
+            text-align: center;
+
         }
 
         .members-table thead {
@@ -141,8 +145,10 @@
 
         .members-table th {
             padding: 12px 15px;
-            text-align: left;
+            /* text-align: left; */
             font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
         }
 
         .members-table td {
@@ -241,23 +247,6 @@
             display: block;
         }
 
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .pagination-info {
-            color: #718096;
-            font-size: 14px;
-        }
-
-        .pagination-controls {
-            display: flex;
-            gap: 10px;
-        }
-
         .page-btn {
             padding: 8px 12px;
             border: 1px solid #e2e8f0;
@@ -271,6 +260,115 @@
             color: white;
             border-color: #4299e1;
         }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: row;
+            /* pastikan horizontal */
+            gap: 8px;
+            /* jarak antar tombol */
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: nowrap;
+            /* tidak turun ke bawah */
+            white-space: nowrap;
+            /* cegah teks pindah baris */
+            overflow-x: auto;
+            /* scroll horizontal jika tidak muat */
+        }
+
+        /* Gaya tombol */
+        .action-buttons a.btn-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+            /* cegah wrap pada teks tombol */
+        }
+
+        /* Warna tombol */
+        .action-buttons .btn-warning {
+            background-color: #f04e4eff;
+        }
+
+        .action-buttons .btn-warning:hover {
+            background-color: #ec971f;
+        }
+
+        .action-buttons .btn-success {
+            background-color: #5cb85c;
+        }
+
+        .action-buttons .btn-success:hover {
+            background-color: #449d44;
+        }
+
+        .action-buttons .btn-info {
+            background-color: #5bc0de;
+        }
+
+        .action-buttons .btn-info:hover {
+            background-color: #31b0d5;
+        }
+
+        /* Ikon */
+        .action-buttons i {
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -280,14 +378,6 @@
     <div class="main-content">
         <div class="page-header">
             <h1 class="page-title">List Anggota UKM</h1>
-            <div class="action-buttons">
-                <button class="btn btn-outline">
-                    <i class="fas fa-file-export"></i> Export
-                </button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Tambah Anggota
-                </button>
-            </div>
         </div>
 
         <div class="search-filter">
@@ -345,73 +435,119 @@
                         </td>
                         <td><?= date('d M Y', strtotime($a['created_at'])) ?></td>
                         <td>
-                            <?php if ($a['status_in_ukm'] === 'active') : ?>
-                                <a href="<?= base_url('dashboard/ukm/anggota/deactivate/' . $a['id_member']) ?>" 
-                                   class="btn-sm btn-warning" 
-                                   title="Nonaktifkan Member"
-                                   onclick="return confirm('Yakin ingin menonaktifkan member ini?')">
-                                    <i class="fas fa-user-slash"></i> Deactivate
-                                </a>
-                            <?php else : ?>
-                                <a href="<?= base_url('dashboard/ukm/anggota/activate/' . $a['id_member']) ?>" 
-                                   class="btn-sm btn-success" 
-                                   title="Aktifkan Member"
-                                   onclick="return confirm('Yakin ingin mengaktifkan member ini?')">
-                                    <i class="fas fa-user-check"></i> Activate
-                                </a>
-                            <?php endif; ?>
+                            <div class="action-buttons">
+                                <?php if ($a['status_in_ukm'] === 'active') : ?>
+                                    <a href="<?= base_url('dashboard/ukm/anggota/deactivate/' . $a['id_member']) ?>"
+                                        class="btn-sm btn-warning"
+                                        title="Nonaktifkan Member"
+                                        onclick="return confirm('Yakin ingin menonaktifkan member ini?')">
+                                        <i class="fas fa-user-slash"></i> Deactivate
+                                    </a>
+                                <?php else : ?>
+                                    <a href="<?= base_url('dashboard/ukm/anggota/activate/' . $a['id_member']) ?>"
+                                        class="btn-sm btn-success"
+                                        title="Aktifkan Member"
+                                        onclick="return confirm('Yakin ingin mengaktifkan member ini?')">
+                                        <i class="fas fa-user-check"></i> Activate
+                                    </a>
+                                <?php endif; ?>
 
-                            <a href="<?= base_url('dashboard/ukm/anggota/edit-jabatan/' . $a['id_member']) ?>" 
-                               class="btn-sm btn-info" 
-                               title="Edit Jabatan">
-                                <i class="fas fa-user-edit"></i> Edit Jabatan
-                            </a>
+                                <a href="javascript:void(0);"
+                                    class="btn-sm btn-info"
+                                    title="Edit Jabatan"
+                                    onclick="openModal('<?= $a['id_member'] ?>', '<?= esc($a['nama_user']) ?>', '<?= esc($a['role_in_ukm']) ?>')">
+                                    <i class="fas fa-user-edit"></i> Edit Jabatan
+                                </a>
+
+                            </div>
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
-        <div class="pagination">
-            <div class="pagination-info">Menampilkan 1-5 dari 25 anggota</div>
-            <div class="pagination-controls">
-                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn">5</button>
-                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        <!-- Modal Edit Jabatan -->
+        <div id="jabatanModal" class="modal-overlay">
+            <div class="modal-content">
+                <h3>Edit Jabatan</h3>
+                <form id="editJabatanForm" method="post">
+                    <input type="hidden" name="id_member" id="modal_id_member">
+                    <div class="form-group">
+                        <label>Nama Anggota</label>
+                        <input type="text" class="form-control" id="modal_nama_user" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Jabatan</label>
+                        <select name="role_in_ukm" id="modal_role_in_ukm" class="form-control" required>
+                            <option value="">-- Pilih Jabatan --</option>
+                            <option value="Ketua">Ketua</option>
+                            <option value="Wakil Ketua">Wakil Ketua</option>
+                            <option value="Sekretaris">Sekretaris</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Anggota">Anggota</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                    </div>
+                </form>
             </div>
         </div>
+
     </div>
 
     <script>
-       function filterTable() {
-    const searchTerm = document.querySelector('.search-input').value.toLowerCase();
-    const selectedStatus = document.querySelector('.status-filter').value.toLowerCase();
-    const selectedJabatan = document.querySelector('.jabatan-filter').value.toLowerCase();
-    const rows = document.querySelectorAll('.members-table tbody tr');
+        function filterTable() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const selectedStatus = document.querySelector('.status-filter').value.toLowerCase();
+            const selectedJabatan = document.querySelector('.jabatan-filter').value.toLowerCase();
+            const rows = document.querySelectorAll('.members-table tbody tr');
 
-    rows.forEach(row => {
-        const name = row.querySelector('.member-name').textContent.toLowerCase();
-        const nim = row.cells[2].textContent.toLowerCase();
-        const prodi = row.cells[4].textContent.toLowerCase();
-        const status = row.querySelector('.status').dataset.status.toLowerCase();
-        const jabatan = row.querySelector('.jabatan').textContent.toLowerCase();
+            rows.forEach(row => {
+                const name = row.querySelector('.member-name').textContent.toLowerCase();
+                const nim = row.cells[2].textContent.toLowerCase();
+                const prodi = row.cells[4].textContent.toLowerCase();
+                const status = row.querySelector('.status').dataset.status.toLowerCase();
+                const jabatan = row.querySelector('.jabatan').textContent.toLowerCase();
 
-        const matchesSearch = name.includes(searchTerm) || nim.includes(searchTerm) || prodi.includes(searchTerm);
-        const matchesStatus = !selectedStatus || status === selectedStatus;
-        const matchesJabatan = !selectedJabatan || jabatan === selectedJabatan;
+                const matchesSearch = name.includes(searchTerm) || nim.includes(searchTerm) || prodi.includes(searchTerm);
+                const matchesStatus = !selectedStatus || status === selectedStatus;
+                const matchesJabatan = !selectedJabatan || jabatan === selectedJabatan;
 
-        row.style.display = (matchesSearch && matchesStatus && matchesJabatan) ? '' : 'none';
-    });
-}
+                row.style.display = (matchesSearch && matchesStatus && matchesJabatan) ? '' : 'none';
+            });
+        }
 
 
         document.querySelector('.search-input').addEventListener('input', filterTable);
         document.querySelector('.status-filter').addEventListener('change', filterTable);
         document.querySelector('.jabatan-filter').addEventListener('change', filterTable);
+
+        function openModal(id, nama, jabatan) {
+            document.getElementById('modal_id_member').value = id;
+            document.getElementById('modal_nama_user').value = nama;
+            document.getElementById('modal_role_in_ukm').value = jabatan;
+
+            const modal = document.getElementById('jabatanModal');
+            modal.style.display = 'flex';
+
+            // Set form action
+            document.getElementById('editJabatanForm').action = `/dashboard/ukm/anggota/update-jabatan/${id}`;
+        }
+
+        function closeModal() {
+            document.getElementById('jabatanModal').style.display = 'none';
+        }
+
+        // Close modal if click outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('jabatanModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 

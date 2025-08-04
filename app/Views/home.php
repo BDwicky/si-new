@@ -212,7 +212,7 @@
                     <button class="category-btn active" data-category="all">
                         <i class="fas fa-th-large me-2"></i>Semua
                     </button>
-                    <button class="category-btn" data-category="seni-budaya">
+                    <button class="category-btn" data-category="seni">
                         <i class="fas fa-palette me-2"></i>Seni & Budaya
                     </button>
                     <button class="category-btn" data-category="olahraga">
@@ -224,8 +224,8 @@
                     <button class="category-btn" data-category="kerohanian">
                         <i class="fas fa-mosque me-2"></i>Kerohanian
                     </button>
-                    <button class="category-btn" data-category="teknologi">
-                        <i class="fas fa-laptop-code me-2"></i>Teknologi
+                    <button class="category-btn" data-category="ilmiah">
+                        <i class="fas fa-laptop-code me-2"></i>Ilmiah
                     </button>
                     <button class="category-btn" data-category="sosial">
                         <i class="fas fa-handshake me-2"></i>Sosial
@@ -432,7 +432,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="<?= base_url('assets/images/testimonials/1.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 1" loading="lazy">
+
                             <div>
                                 <h5 class="mb-0">Budi Santoso</h5>
                                 <small class="text-muted">Ketua UKM Basket</small>
@@ -452,7 +452,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="<?= base_url('assets/images/testimonials/2.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 2" loading="lazy">
+
                             <div>
                                 <h5 class="mb-0">Anita Rahayu</h5>
                                 <small class="text-muted">Anggota UKM Robotika</small>
@@ -472,7 +472,6 @@
                 <div class="col-md-4 mb-4">
                     <div class="testimonial-card p-4 h-100 bg-white rounded-3 shadow-sm animate-in">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="<?= base_url('assets/images/testimonials/3.jpg') ?>" class="rounded-circle me-3" width="60" alt="Testimoni 3" loading="lazy">
                             <div>
                                 <h5 class="mb-0">Dr. Surya Wijaya</h5>
                                 <small class="text-muted">Pembina UKM</small>
