@@ -79,6 +79,18 @@
         transition: all 0.2s;
     }
 
+    .form-control.desc {
+        height: 60px;
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        background: #f8fafc;
+        transition: all 0.2s;
+    }
+
+
     .form-control:focus {
         border-color: #6366f1;
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
@@ -201,6 +213,16 @@
                             <option value="3" <?= $user['role_id'] == 3 ? 'selected' : '' ?>>User</option>
                         </select>
                     </div>
+
+                    <?php if ($user['role_id'] == 2 && isset($ukm) && isset($ukm['deskripsi'])): ?>
+                        <div id="ukmFields">
+                            <label for="deskripsi">Deskripsi UKM</label>
+                            <textarea name="deskripsi" class="form-control desc" rows="5" required><?= esc($ukm['deskripsi']) ?></textarea>
+                        </div>
+                    <?php endif; ?>
+
+
+
                 </div>
 
                 <!-- Personal Information -->
@@ -286,38 +308,38 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const roleSelect = document.querySelector('select[name="role_id"]');
-    
-    const nimInput = document.querySelector('input[name="nim"]');
-    const fakultasSelect = document.querySelector('select[name="fakultas"]');
-    const prodiSelect = document.querySelector('select[name="program_studi"]');
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleSelect = document.querySelector('select[name="role_id"]');
 
-    const nimField = nimInput.closest('.form-group');
-    const fakultasField = fakultasSelect.closest('.form-group');
-    const prodiField = prodiSelect.closest('.form-group');
-    const academicSection = document.getElementById('academic-info');
+        const nimInput = document.querySelector('input[name="nim"]');
+        const fakultasSelect = document.querySelector('select[name="fakultas"]');
+        const prodiSelect = document.querySelector('select[name="program_studi"]');
 
-    function toggleMahasiswaFields() {
-        const isMahasiswa = roleSelect.value === '3';
+        const nimField = nimInput.closest('.form-group');
+        const fakultasField = fakultasSelect.closest('.form-group');
+        const prodiField = prodiSelect.closest('.form-group');
+        const academicSection = document.getElementById('academic-info');
 
-        nimField.style.display = isMahasiswa ? 'block' : 'none';
-        fakultasField.style.display = isMahasiswa ? 'block' : 'none';
-        prodiField.style.display = isMahasiswa ? 'block' : 'none';
-        academicSection.style.display = isMahasiswa ? 'block' : 'none';
+        function toggleMahasiswaFields() {
+            const isMahasiswa = roleSelect.value === '3';
 
-        // Set atau hapus atribut required
-        nimInput.required = isMahasiswa;
-        fakultasSelect.required = isMahasiswa;
-        prodiSelect.required = isMahasiswa;
-    }
+            nimField.style.display = isMahasiswa ? 'block' : 'none';
+            fakultasField.style.display = isMahasiswa ? 'block' : 'none';
+            prodiField.style.display = isMahasiswa ? 'block' : 'none';
+            academicSection.style.display = isMahasiswa ? 'block' : 'none';
 
-    // Jalankan saat halaman load
-    toggleMahasiswaFields();
+            // Set atau hapus atribut required
+            nimInput.required = isMahasiswa;
+            fakultasSelect.required = isMahasiswa;
+            prodiSelect.required = isMahasiswa;
+        }
 
-    // Jalankan saat role berubah
-    roleSelect.addEventListener('change', toggleMahasiswaFields);
-});
+        // Jalankan saat halaman load
+        toggleMahasiswaFields();
+
+        // Jalankan saat role berubah
+        roleSelect.addEventListener('change', toggleMahasiswaFields);
+    });
 
 
     const programStudiData = {
@@ -362,8 +384,19 @@
         }
     });
 
-    // Update saat fakultas dipilih
-    fakultasSelect.addEventListener('change', function() {
-        populateProgramStudi(this.value);
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleSelect = document.querySelector('select[name="role_id"]');
+        const ukmFields = document.getElementById('ukmFields');
+
+        function toggleUkmFields() {
+            if (roleSelect.value === '2') {
+                ukmFields.style.display = 'block';
+            } else {
+                ukmFields.style.display = 'none';
+            }
+        }
+
+        toggleUkmFields();
+        roleSelect.addEventListener('change', toggleUkmFields);
     });
 </script>

@@ -2,28 +2,91 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
+    .table-scroll-wrapper {
+        max-height: 700px;
+        /* atau tinggi yang kamu inginkan */
+        overflow-y: auto;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .table-scroll-wrapper td,
+    .table-scroll-wrapper th {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* Sticky header */
+    .styled-table thead th {
+        position: sticky;
+        top: 0;
+        background-color: #1e2a3a;
+        /* Ganti sesuai warna tema kamu */
+        color: #fff;
+        z-index: 2;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #444;
+    }
+
+    .table-scroll-wrapper thead th {
+        position: sticky;
+        top: 0;
+        background-color: #1e2a3a;
+        color: #fff;
+        z-index: 2;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #444;
+    }
+
     .table-container {
-        padding-top: 30px;
+        /* padding-top: 30px; */
         margin-left: 300px;
         margin-right: 20px;
+        /* width: 100%; */
+        margin-top: 20px;
     }
 
     .table-container table {
         border-collapse: collapse;
         width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 50px;
     }
 
     .table-container th,
     .table-container td {
+        /* border: 1px solid #ddd;
+        padding: 12px 15px;
+        text-align: left;
+        position: sticky;
+        top: 0;
+        /* background-color: #1e2a3a; */
+        /* z-index: 2; */
         border: 1px solid #ddd;
-        padding: 8px;
-        ;
+        padding: 12px 15px;
+        text-align: left;
+        /* HAPUS baris berikut */
+        /* position: sticky; top: 0; */
     }
 
-    .table-container th {
+    .table-container thead {
         background-color: #1e2a3a;
         color: white;
-        /* font-style: italic; */
+    }
+
+    .table-container tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table-container tbody tr:hover {
+        background-color: #f1f1f1;
     }
 
     .filter-container {
@@ -79,6 +142,7 @@
         gap: 8px;
         box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
         text-decoration: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .btn-add-user:hover {
@@ -97,6 +161,7 @@
 <header class="page-header">
     <h1>List Akun</h1>
 </header>
+
 <div class="table-container">
     <!-- <h1 class="mb-3">List User</h1> -->
 
@@ -114,92 +179,94 @@
         </a>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Username</th>
-                <th>Nama Lengkap</th>
-                <th>Email</th>
-                <th class="nim-column">NIM</th>
-                <th class="phone">No. Telp</th>
-                <th class="fakultas-column">Fakultas</th>
-                <th class="prodi-column">Program Studi</th>
-                <th>Role</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="userTable">
-            <?php if (!empty($users)) : ?>
-                <?php $no = 1;
-                foreach ($users as $user) : ?>
-                    <tr data-role="<?= esc($user['role_id']) ?>">
-                        <td><?= $no++ ?></td>
-                        <td><?= esc($user['username']) ?></td>
-                        <td><?= esc($user['name']) ?></td>
-                        <td><?= esc($user['email']) ?></td>
-                        <td class="nim-column"><?= esc($user['nim']) ?></td>
-                        <td class="phone"><?= esc($user['phone']) ?></td>
-                        <td class="fakultas-column"><?= esc($user['fakultas']) ?></td>
-                        <td class="prodi-column"><?= esc($user['program_studi']) ?></td>
-                        <td>
-                            <?php
-                            switch ($user['role_id']) {
-                                case 1:
-                                    echo 'Admin';
-                                    break;
-                                case 2:
-                                    echo 'UKM';
-                                    break;
-                                case 3:
-                                    echo 'User';
-                                    break;
-                                default:
-                                    echo 'Tidak diketahui';
-                            }
-                            ?>
-                        </td>
-
-
-                        <td style="text-align: center; vertical-align: middle;">
-                            <div style="display: inline-flex; align-items: center; gap: 8px;">
-                                <!-- Edit Button -->
-                                <a href="<?= base_url('dashboard/admin/edit/' . $user['id']) ?>"
-                                    class="btn-edit"
-                                    style="padding: 5px 12px; background-color: #3498db; color: white; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-                                    <i class="fas fa-pencil-alt" style="font-size: 12px;"></i> Edit
-                                </a>
-
-                                <!-- Separator -->
-                                <span style="color: #ddd;">|</span>
-
-                                <!-- Delete Form -->
-                                <form action="<?= base_url('dashboard/admin/delete/' . $user['id']) ?>"
-                                    method="post"
-                                    style="display: inline; margin: 0;"
-                                    onsubmit="return confirm('Yakin ingin hapus?')">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <?= csrf_field() ?>
-                                    <button type="submit"
-                                        class="btn-delete"
-                                        style="padding: 5px 12px; background-color: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
-                                        <i class="fas fa-trash-alt" style="font-size: 12px;"></i> Hapus
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-
-
-
-                    </tr>
-                <?php endforeach ?>
-            <?php else : ?>
+    <div class="table-scroll-wrapper">
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="9" align="center">Data belum ada.</td>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Nama Lengkap</th>
+                    <th>Email</th>
+                    <th class="nim-column">NIM</th>
+                    <th class="phone">No. Telp</th>
+                    <th class="fakultas-column">Fakultas</th>
+                    <th class="prodi-column">Program Studi</th>
+                    <th>Role</th>
+                    <th>Aksi</th>
                 </tr>
-            <?php endif ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="userTable">
+                <?php if (!empty($users)) : ?>
+                    <?php $no = 1;
+                    foreach ($users as $user) : ?>
+                        <tr data-role="<?= esc($user['role_id']) ?>">
+                            <td><?= $no++ ?></td>
+                            <td><?= esc($user['username']) ?></td>
+                            <td><?= esc($user['name']) ?></td>
+                            <td><?= esc($user['email']) ?></td>
+                            <td class="nim-column"><?= esc($user['nim']) ?></td>
+                            <td class="phone"><?= esc($user['phone']) ?></td>
+                            <td class="fakultas-column"><?= esc($user['fakultas']) ?></td>
+                            <td class="prodi-column"><?= esc($user['program_studi']) ?></td>
+                            <td>
+                                <?php
+                                switch ($user['role_id']) {
+                                    case 1:
+                                        echo 'Admin';
+                                        break;
+                                    case 2:
+                                        echo 'UKM';
+                                        break;
+                                    case 3:
+                                        echo 'User';
+                                        break;
+                                    default:
+                                        echo 'Tidak diketahui';
+                                }
+                                ?>
+                            </td>
+
+
+                            <td style="text-align: center; vertical-align: middle;">
+                                <div style="display: inline-flex; align-items: center; gap: 8px;">
+                                    <!-- Edit Button -->
+                                    <a href="<?= base_url('dashboard/admin/edit/' . $user['id']) ?>"
+                                        class="btn-edit"
+                                        style="padding: 5px 12px; background-color: #3498db; color: white; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                        <i class="fas fa-pencil-alt" style="font-size: 12px;"></i> Edit
+                                    </a>
+
+                                    <!-- Separator -->
+                                    <span style="color: #ddd;">|</span>
+
+                                    <!-- Delete Form -->
+                                    <form action="<?= base_url('dashboard/admin/delete/' . $user['id']) ?>"
+                                        method="post"
+                                        style="display: inline; margin: 0;"
+                                        onsubmit="return confirm('Yakin ingin hapus?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <?= csrf_field() ?>
+                                        <button type="submit"
+                                            class="btn-delete"
+                                            style="padding: 5px 12px; background-color: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                                            <i class="fas fa-trash-alt" style="font-size: 12px;"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+
+
+
+                        </tr>
+                    <?php endforeach ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="9" align="center">Data belum ada.</td>
+                    </tr>
+                <?php endif ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>

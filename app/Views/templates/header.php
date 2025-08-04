@@ -24,10 +24,25 @@
             </ul>
 
             <?php if ($session->get('id_user')): ?>
-                <button class="btn btn-primary ms-3" onclick="window.location.href='dashboard/admin'">Dashboard</button>
+                <?php
+                $role = $session->get('role');
+                $dashboardUrl = '';
+
+                if ($role == 1) {
+                    $dashboardUrl = 'dashboard/admin';
+                } elseif ($role == 2) {
+                    $dashboardUrl = 'dashboard/ukm';
+                } elseif ($role == 3) {
+                    $dashboardUrl = 'dashboard/user';
+                } else {
+                    $dashboardUrl = 'akses-ditolak';
+                }
+                ?>
+                <button class="btn btn-primary ms-3" onclick="window.location.href='<?= base_url($dashboardUrl) ?>'">Dashboard</button>
             <?php else: ?>
-                <button class="btn btn-primary ms-3" onclick="window.location.href='/login'">Login</button>
+                <button class="btn btn-primary ms-3" onclick="window.location.href='<?= base_url('login') ?>'">Login</button>
             <?php endif; ?>
+
         </div>
     </div>
 </nav>

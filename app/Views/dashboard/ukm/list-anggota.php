@@ -18,6 +18,26 @@
             flex-direction: column;
         }
 
+        .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.badge-aktif {
+    background-color: #c6f6d5; /* Hijau lembut */
+    color: #22543d;
+}
+
+.badge-nonaktif {
+    background-color: #fed7d7; /* Merah lembut */
+    color: #822727;
+}   
+
         .main-content {
             margin-left: 300px;
             padding: 30px;
@@ -105,31 +125,37 @@
             width: 100%;
             border-collapse: collapse;
             background-color: white;
+            /* margin-left: 300px; */
+            margin-top: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             overflow: hidden;
         }
 
-        .members-table th {
-            background-color: #2d3748;
+        .members-table thead {
+            background-color: #1e2a3a;
             color: white;
-            padding: 15px;
+        }
+
+        .members-table th {
+            padding: 12px 15px;
             text-align: left;
             font-weight: 600;
         }
 
         .members-table td {
-            padding: 15px;
-            border-bottom: 1px solid #edf2f7;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             vertical-align: middle;
         }
 
-        .members-table tr:last-child td {
-            border-bottom: none;
+        .members-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
-        .members-table tr:hover {
-            background-color: #f8fafc;
+        .members-table tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         .member-avatar {
@@ -248,7 +274,6 @@
 </head>
 
 <body>
-    <!-- Include Sidebar -->
     <?= $this->include('templates/sidebar-admin') ?>
 
     <div class="main-content">
@@ -269,172 +294,85 @@
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" placeholder="Cari anggota...">
             </div>
-            <select class="filter-select">
-                <option>Semua Status</option>
-                <option>Aktif</option>
-                <option>Tidak Aktif</option>
-                <option>Pending</option>
+            <select class="filter-select status-filter">
+                <option value="">Semua Status</option>
+                <option value="active">Aktif</option>
+                <option value="deactive">Nonaktif</option>
             </select>
-            <select class="filter-select">
-                <option>Semua Divisi</option>
-                <option>Humas</option>
-                <option>Kaderisasi</option>
-                <option>Dana</option>
-                <option>Sarana & Perlengkapan</option>
+            <select class="filter-select jabatan-filter">
+                <option value="">Semua Jabatan</option>
+                <option value="ketua">Ketua</option>
+                <option value="wakil">Wakil</option>
+                <option value="sekretaris">Sekretaris</option>
+                <option value="bendahara">Bendahara</option>
+                <option value="anggota">Anggota</option>
             </select>
         </div>
 
         <table class="members-table">
             <thead>
                 <tr>
-                    <th width="50">No</th>
-                    <th>Nama Lengkap</th>
+                    <th>No</th>
+                    <th>Nama</th>
                     <th>NIM</th>
+                    <th>Fakultas</th>
                     <th>Program Studi</th>
-                    <th>Divisi</th>
+                    <th>Jabatan</th>
                     <th>Status</th>
                     <th>Tanggal Bergabung</th>
                     <th width="50">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">JD</div>
-                            John Doe
-                        </div>
-                    </td>
-                    <td>20210710001</td>
-                    <td>Teknik Informatika</td>
-                    <td>Humas</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>12/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">JS</div>
-                            Jane Smith
-                        </div>
-                    </td>
-                    <td>20210710002</td>
-                    <td>Sistem Informasi</td>
-                    <td>Kaderisasi</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>15/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">RJ</div>
-                            Robert Johnson
-                        </div>
-                    </td>
-                    <td>20210710003</td>
-                    <td>Teknik Elektro</td>
-                    <td>Dana</td>
-                    <td><span class="status-badge status-inactive">Tidak Aktif</span></td>
-                    <td>20/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">AM</div>
-                            Alice Miller
-                        </div>
-                    </td>
-                    <td>20210710004</td>
-                    <td>Manajemen</td>
-                    <td>Sarana & Perlengkapan</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>25/08/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>
-                        <div class="member-name">
-                            <div class="member-avatar">TW</div>
-                            Thomas Wilson
-                        </div>
-                    </td>
-                    <td>20210710005</td>
-                    <td>Akuntansi</td>
-                    <td>Humas</td>
-                    <td><span class="status-badge status-active">Aktif</span></td>
-                    <td>01/09/2023</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <button class="dropdown-btn">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#"><i class="fas fa-eye"></i> Detail</a>
-                                <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="#"><i class="fas fa-trash"></i> Hapus</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <?php $no = 1;
+                foreach ($anggota as $a) : ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td>
+                            <div class="member-name"><?= esc($a['nama_user']) ?></div>
+                        </td>
+                        <td><?= esc($a['nim']) ?></td>
+                        <td><?= esc($a['fakultas']) ?></td>
+                        <td><?= esc($a['program_studi']) ?></td>
+                        <td class="jabatan"><?= esc(($a['role_in_ukm'])) ?></td>
+                        <td class="status" data-status="<?= esc($a['status_in_ukm']) ?>">
+                            <?php if ($a['status_in_ukm'] === 'active') : ?>
+                                <span class="badge badge-aktif">Aktif</span>
+                            <?php elseif ($a['status_in_ukm'] === 'deactive') : ?>
+                                <span class="badge badge-nonaktif">Nonaktif</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= date('d M Y', strtotime($a['created_at'])) ?></td>
+                        <td>
+                            <?php if ($a['status_in_ukm'] === 'active') : ?>
+                                <a href="<?= base_url('dashboard/ukm/anggota/deactivate/' . $a['id_member']) ?>" 
+                                   class="btn-sm btn-warning" 
+                                   title="Nonaktifkan Member"
+                                   onclick="return confirm('Yakin ingin menonaktifkan member ini?')">
+                                    <i class="fas fa-user-slash"></i> Deactivate
+                                </a>
+                            <?php else : ?>
+                                <a href="<?= base_url('dashboard/ukm/anggota/activate/' . $a['id_member']) ?>" 
+                                   class="btn-sm btn-success" 
+                                   title="Aktifkan Member"
+                                   onclick="return confirm('Yakin ingin mengaktifkan member ini?')">
+                                    <i class="fas fa-user-check"></i> Activate
+                                </a>
+                            <?php endif; ?>
+
+                            <a href="<?= base_url('dashboard/ukm/anggota/edit-jabatan/' . $a['id_member']) ?>" 
+                               class="btn-sm btn-info" 
+                               title="Edit Jabatan">
+                                <i class="fas fa-user-edit"></i> Edit Jabatan
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 
         <div class="pagination">
-            <div class="pagination-info">
-                Menampilkan 1-5 dari 25 anggota
-            </div>
+            <div class="pagination-info">Menampilkan 1-5 dari 25 anggota</div>
             <div class="pagination-controls">
                 <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="page-btn active">1</button>
@@ -448,32 +386,33 @@
     </div>
 
     <script>
-        // Simple search functionality
-        document.querySelector('.search-input').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = document.querySelectorAll('.members-table tbody tr');
+       function filterTable() {
+    const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+    const selectedStatus = document.querySelector('.status-filter').value.toLowerCase();
+    const selectedJabatan = document.querySelector('.jabatan-filter').value.toLowerCase();
+    const rows = document.querySelectorAll('.members-table tbody tr');
 
-            rows.forEach(row => {
-                const name = row.querySelector('.member-name').textContent.toLowerCase();
-                const nim = row.cells[2].textContent.toLowerCase();
-                const prodi = row.cells[3].textContent.toLowerCase();
+    rows.forEach(row => {
+        const name = row.querySelector('.member-name').textContent.toLowerCase();
+        const nim = row.cells[2].textContent.toLowerCase();
+        const prodi = row.cells[4].textContent.toLowerCase();
+        const status = row.querySelector('.status').dataset.status.toLowerCase();
+        const jabatan = row.querySelector('.jabatan').textContent.toLowerCase();
 
-                if (name.includes(searchTerm) || nim.includes(searchTerm) || prodi.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
+        const matchesSearch = name.includes(searchTerm) || nim.includes(searchTerm) || prodi.includes(searchTerm);
+        const matchesStatus = !selectedStatus || status === selectedStatus;
+        const matchesJabatan = !selectedJabatan || jabatan === selectedJabatan;
 
-        // Filter functionality
-        document.querySelectorAll('.filter-select').forEach(select => {
-            select.addEventListener('change', function() {
-                // Implement your filter logic here
-                console.log('Filter changed:', this.value);
-            });
-        });
+        row.style.display = (matchesSearch && matchesStatus && matchesJabatan) ? '' : 'none';
+    });
+}
+
+
+        document.querySelector('.search-input').addEventListener('input', filterTable);
+        document.querySelector('.status-filter').addEventListener('change', filterTable);
+        document.querySelector('.jabatan-filter').addEventListener('change', filterTable);
     </script>
 </body>
+
 
 </html>

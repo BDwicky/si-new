@@ -221,8 +221,8 @@
                     <button class="category-btn" data-category="akademik">
                         <i class="fas fa-graduation-cap me-2"></i>Akademik
                     </button>
-                    <button class="category-btn" data-category="keagamaan">
-                        <i class="fas fa-mosque me-2"></i>Keagamaan
+                    <button class="category-btn" data-category="kerohanian">
+                        <i class="fas fa-mosque me-2"></i>Kerohanian
                     </button>
                     <button class="category-btn" data-category="teknologi">
                         <i class="fas fa-laptop-code me-2"></i>Teknologi
@@ -234,114 +234,45 @@
             </div>
 
             <div id="noResults" class="text-center my-5 d-none">
+                <!--
                 <img src="<?= base_url('assets/images/no-results.png') ?>" alt="Tidak ditemukan" width="150" class="mb-3" loading="lazy">
+                -->
                 <h4>UKM tidak ditemukan</h4>
                 <p class="text-muted">Coba gunakan kata kunci lain atau pilih kategori berbeda</p>
             </div>
 
+            <?php helper('html'); ?>
             <div class="row g-4" id="ukmContainer">
-                <!-- UKM 1 - Paduan Suara -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="seni-budaya" data-name="paduan suara mahasiswa">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-music fa-3x text-primary me-3"></i>
-                                <h4 class="mb-0">Paduan Suara Mahasiswa</h4>
+                <?php foreach ($list_ukm as $ukm): ?>
+                    <div class="col-lg-4 col-md-6 ukm-item"
+                        data-category="<?= esc(strtolower($ukm['kategori'])) ?>"
+                        data-name="<?= esc(strtolower($ukm['name'])) ?>">
+                        <a href="<?= base_url('ukm/' . $ukm['id']) ?>" target="_blank" class="text-decoration-none text-dark">
+                            <div class="feature-card h-100">
+                                <div class="p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-users fa-3x text-primary me-3"></i>
+                                        <h4 class="mb-0"><?= esc($ukm['name']) ?></h4>
+                                    </div>
+                                    <p class="text-muted">
+                                        <?= esc(strlen($ukm['deskripsi']) > 100 ? substr($ukm['deskripsi'], 0, 100) . '...' : $ukm['deskripsi']) ?>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-primary">
+                                            <i class="fas fa-tag me-1"></i> <?= esc($ukm['kategori']) ?>
+                                        </span>
+                                        <small class="text-muted">
+                                            <i class="fas fa-users me-1"></i> <?= esc($ukm['jumlah_anggota']) ?> anggota
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-muted">Wadah bagi mahasiswa pecinta musik vokal. Kami rutin mengadakan latihan mingguan dan tampil di berbagai acara kampus.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-primary"><i class="fas fa-palette me-1"></i> Seni & Budaya</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 150+ anggota</small>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- UKM 2 - Basket -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="olahraga" data-name="ukm basket">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-basketball-ball fa-3x text-success me-3"></i>
-                                <h4 class="mb-0">UKM Basket</h4>
-                            </div>
-                            <p class="text-muted">Komunitas basket kampus yang aktif berlatih dan mengikuti kompetisi antar universitas. Terbuka untuk semua skill level.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-success"><i class="fas fa-dumbbell me-1"></i> Olahraga</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 80+ anggota</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UKM 3 - Robotika -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="teknologi" data-name="ukm robotika">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-robot fa-3x text-info me-3"></i>
-                                <h4 class="mb-0">UKM Robotika</h4>
-                            </div>
-                            <p class="text-muted">Mengembangkan inovasi di bidang robotika melalui penelitian, workshop, dan kompetisi nasional/internasional.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-info"><i class="fas fa-laptop-code me-1"></i> Teknologi</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 60+ anggota</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UKM 4 - Debat -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="akademik" data-name="ukm debat mahasiswa">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-comments fa-3x text-warning me-3"></i>
-                                <h4 class="mb-0">UKM Debat Mahasiswa</h4>
-                            </div>
-                            <p class="text-muted">Mengasah kemampuan berpikir kritis dan public speaking melalui kegiatan debat kompetitif dengan sistem parlementer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-warning text-dark"><i class="fas fa-graduation-cap me-1"></i> Akademik</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 45+ anggota</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UKM 5 - Rohis -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="keagamaan" data-name="rohani islam">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-mosque fa-3x text-secondary me-3"></i>
-                                <h4 class="mb-0">Rohani Islam (ROHIS)</h4>
-                            </div>
-                            <p class="text-muted">Meningkatkan pemahaman dan pengamalan ajaran Islam melalui kajian, dakwah, dan kegiatan sosial keagamaan.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-secondary"><i class="fas fa-mosque me-1"></i> Keagamaan</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 200+ anggota</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UKM 6 - KPM -->
-                <div class="col-lg-4 col-md-6 ukm-item" data-category="sosial" data-name="keluarga peduli masyarakat">
-                    <div class="feature-card h-100">
-                        <div class="p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fas fa-hands-helping fa-3x text-danger me-3"></i>
-                                <h4 class="mb-0">Keluarga Peduli Masyarakat (KPM)</h4>
-                            </div>
-                            <p class="text-muted">Melakukan berbagai kegiatan pengabdian masyarakat seperti bakti sosial, pendidikan anak jalanan, dan pembangunan desa.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-danger"><i class="fas fa-handshake me-1"></i> Sosial</span>
-                                <small class="text-muted"><i class="fas fa-users me-1"></i> 120+ anggota</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
+
+
         </div>
     </section>
 

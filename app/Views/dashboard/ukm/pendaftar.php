@@ -76,21 +76,7 @@
             border: none;
         }
 
-        .registrations-table-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            margin-top: 50px;
-        }
 
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 20px;
-            border-bottom: 1px solid #edf2f7;
-            align-items: center;
-        }
 
         .bulk-actions {
             display: flex;
@@ -122,34 +108,55 @@
             color: #a0aec0;
         }
 
+        .registrations-table-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-top: 50px;
+            /* margin-left: 300px; */
+            /* opsional, kalau layout pakai sidebar */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #edf2f7;
+            align-items: center;
+        }
+
         .registrations-table {
             width: 100%;
             border-collapse: collapse;
         }
 
+        .registrations-table thead {
+            background-color: #1e2a3a;
+            color: white;
+        }
+
         .registrations-table th {
-            background-color: #f8fafc;
-            color: #4a5568;
-            padding: 15px 20px;
+            padding: 12px 15px;
             text-align: left;
             font-weight: 600;
             font-size: 14px;
-            border-bottom: 1px solid #edf2f7;
         }
 
         .registrations-table td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #edf2f7;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             vertical-align: middle;
             font-size: 14px;
         }
 
-        .registrations-table tr:last-child td {
-            border-bottom: none;
+        .registrations-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
 
-        .registrations-table tr:hover {
-            background-color: #f8fafc;
+        .registrations-table tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         .select-checkbox {
@@ -332,7 +339,7 @@
                     <tr>
                         <th width="40"><input type="checkbox" class="select-checkbox"></th>
                         <th>Nama Pendaftar</th>
-                        <th>UKM Tujuan</th>
+                        <th>Fakultas</th>
                         <th>Program Studi</th>
                         <th>Tanggal Daftar</th>
                         <th>Status</th>
@@ -340,133 +347,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">JD</div>
-                                <div>
-                                    <div class="applicant-name">John Doe</div>
-                                    <div class="applicant-nim">20210710001</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Futsal</td>
-                        <td>Teknik Informatika</td>
-                        <td>12/08/2023</td>
-                        <td><span class="status-badge status-pending">Menunggu</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-approve" title="Setujui">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button class="action-btn btn-reject" title="Tolak">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">AS</div>
-                                <div>
-                                    <div class="applicant-name">Alice Smith</div>
-                                    <div class="applicant-nim">20210710002</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Pencak Silat</td>
-                        <td>Sistem Informasi</td>
-                        <td>15/08/2023</td>
-                        <td><span class="status-badge status-approved">Disetujui</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">RJ</div>
-                                <div>
-                                    <div class="applicant-name">Robert Johnson</div>
-                                    <div class="applicant-nim">20210710003</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Bola Volly</td>
-                        <td>Teknik Elektro</td>
-                        <td>18/08/2023</td>
-                        <td><span class="status-badge status-rejected">Ditolak</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">MB</div>
-                                <div>
-                                    <div class="applicant-name">Maria Brown</div>
-                                    <div class="applicant-nim">20210710004</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Catur</td>
-                        <td>Manajemen</td>
-                        <td>20/08/2023</td>
-                        <td><span class="status-badge status-pending">Menunggu</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-approve" title="Setujui">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button class="action-btn btn-reject" title="Tolak">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="select-checkbox"></td>
-                        <td>
-                            <div class="applicant-info">
-                                <div class="applicant-avatar">TW</div>
-                                <div>
-                                    <div class="applicant-name">Thomas Wilson</div>
-                                    <div class="applicant-nim">20210710005</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>UKM Futsal</td>
-                        <td>Akuntansi</td>
-                        <td>22/08/2023</td>
-                        <td><span class="status-badge status-approved">Disetujui</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="action-btn btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php if (!empty($anggota)) : ?>
+                        <?php foreach ($anggota as $row) : ?>
+                            <tr>
+                                <td><input type="checkbox" class="select-checkbox"></td>
+                                <td>
+                                    <div class="applicant-info">
+                                        <div class="applicant-avatar">
+                                            <?= strtoupper(substr($row['nama_user'], 0, 1)) ?>
+                                        </div>
+                                        <div>
+                                            <div class="applicant-name"><?= esc($row['nama_user']) ?></div>
+                                            <div class="applicant-nim"><?= esc($row['nim']) ?></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><?= esc($row['fakultas']) ?></td>
+                                <td><?= esc($row['program_studi']) ?></td>
+                                <td><?= date('d/m/Y', strtotime($row['created_at'])) ?></td>
+                                <td>
+                                    <span class="status-badge status-pending">
+                                        Menunggu
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn btn-approve" data-id="<?= $row['id_member'] ?>" title="Setujui">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="action-btn btn-reject" data-id="<?= $row['id_member'] ?>" title="Tolak">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">Tidak ada pendaftar ditemukan.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
 
@@ -483,15 +403,12 @@
                     <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-
-            <h1>KONTOOOOOOOOOOOOOOOOL</h1>
         </div>
     </div>
 
     <script>
-        // Basic functionality for the table
         document.addEventListener('DOMContentLoaded', function() {
-            // Select all checkbox
+            // Select All Checkbox
             const selectAll = document.querySelector('thead .select-checkbox');
             const checkboxes = document.querySelectorAll('tbody .select-checkbox');
 
@@ -501,26 +418,57 @@
                 });
             });
 
-            // Approve/Reject buttons
+            // Approve Button
             document.querySelectorAll('.btn-approve').forEach(btn => {
                 btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
                     const row = this.closest('tr');
-                    row.querySelector('.status-badge').className = 'status-badge status-approved';
-                    row.querySelector('.status-badge').textContent = 'Disetujui';
-                    // In real implementation, you would make an AJAX call here
+
+                    fetch('<?= base_url("dashboard/ukm/setujui") ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `id=${id}`
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                const badge = row.querySelector('.status-badge');
+                                badge.className = 'status-badge status-approved';
+                                badge.textContent = 'Approved';
+                                location.reload();
+                            }
+                        });
                 });
             });
 
+            // Reject Button
             document.querySelectorAll('.btn-reject').forEach(btn => {
                 btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
                     const row = this.closest('tr');
-                    row.querySelector('.status-badge').className = 'status-badge status-rejected';
-                    row.querySelector('.status-badge').textContent = 'Ditolak';
-                    // In real implementation, you would make an AJAX call here
+
+                    fetch('<?= base_url("dashboard/ukm/tolak") ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `id=${id}`
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                const badge = row.querySelector('.status-badge');
+                                badge.className = 'status-badge status-rejected';
+                                badge.textContent = 'Rejected';
+                                location.reload();
+                            }
+                        });
                 });
             });
 
-            // Search functionality
+            // Search Function
             const searchInput = document.querySelector('.search-input');
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
@@ -531,11 +479,7 @@
                     const nim = row.querySelector('.applicant-nim').textContent.toLowerCase();
                     const ukm = row.cells[2].textContent.toLowerCase();
 
-                    if (name.includes(searchTerm) || nim.includes(searchTerm) || ukm.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = (name.includes(searchTerm) || nim.includes(searchTerm) || ukm.includes(searchTerm)) ? '' : 'none';
                 });
             });
         });

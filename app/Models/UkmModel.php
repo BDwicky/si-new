@@ -12,6 +12,8 @@ class UkmModel extends Model
     protected $allowedFields = [
         'name',
         'user_id',
+        'deskripsi',
+        'kategori',
         'created_at',
         'updated_at'
     ];
@@ -19,5 +21,4 @@ class UkmModel extends Model
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    
 }
