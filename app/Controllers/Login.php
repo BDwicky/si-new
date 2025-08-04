@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
-
 class Login extends BaseController
 {
     public function index()
@@ -13,17 +12,20 @@ class Login extends BaseController
         // Cek apakah user sudah login
         if ($session->get('id_user')) {
             $session->setFlashdata('message', 'Anda sudah login');
-            
-            if ($session->get('role') == 2) {
-                return redirect()->to('dashboard/ukm');
-            }
 
-            if ($session->get('role') == 3) {
-                return redirect()->to('dashboard/user');
+            // Redirect berdasarkan role
+            switch ($session->get('role')) {
+                case 1:
+                    return redirect()->to('dashboard/admin');
+                case 2:
+                    return redirect()->to('dashboard/ukm');
+                case 3:
+                    return redirect()->to('dashboard/user');
+                default:
+                    return redirect()->to('/');
             }
-
-            return redirect()->to('dashboard/admin');
         }
+
         return view('login/index');
     }
 
@@ -33,10 +35,8 @@ class Login extends BaseController
         $model = new UserModel();
 
         $username = $this->request->getPost('username');
-        $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $user = $model->where('username', $username)->first();
         $user = $model->where('username', $username)->first();
 
         if ($user && password_verify($password, $user['password'])) {
@@ -50,10 +50,18 @@ class Login extends BaseController
                 'logged_in' => true
             ]);
 
-            // Redirect ke dashboard admin
-            return redirect()->to(base_url('dashboard/admin'))->with('success', 'Login berhasil.');
+            // Redirect berdasarkan role
+            switch ($user['role_id']) {
+                case 1:
+                    return redirect()->to('dashboard/admin')->with('success', 'Login berhasil.');
+                case 2:
+                    return redirect()->to('dashboard/ukm')->with('success', 'Login berhasil.');
+                case 3:
+                    return redirect()->to('dashboard/user')->with('success', 'Login berhasil.');
+                default:
+                    return redirect()->to('/')->with('error', 'Role tidak dikenali.');
+            }
         } else {
-            return redirect()->back()->withInput()->with('error', 'Username atau Password salah!');
             return redirect()->back()->withInput()->with('error', 'Username atau Password salah!');
         }
     }
@@ -63,10 +71,28 @@ class Login extends BaseController
         $session = session();
         $session->destroy();  // Hapus semua session
 
-        return redirect()->to(base_url('/'))->with('success', 'Berhasil logout.');
-        $session = session();
-        $session->destroy();  // Hapus semua session
+        return redirect()->to('/')->with('success', 'Berhasil logout.');
+    }
 
-        return redirect()->to(base_url('/'))->with('success', 'Berhasil logout.');
+    public function redirectDashboard()
+    {
+        $session = session();
+
+        if (!$session->get('logged_in')) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $role = $session->get('role');
+
+        switch ($role) {
+            case 1:
+                return redirect()->to('/dashboard/admin');
+            case 2:
+                return redirect()->to('/dashboard/ukm');
+            case 3:
+                return redirect()->to('/dashboard/user');
+            default:
+                return redirect()->to('/akses-ditolak');
+        }
     }
 }

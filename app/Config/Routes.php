@@ -6,32 +6,33 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+// =====================
+// PUBLIC ROUTES
+// =====================
 
-/**
- * PUBLIC ROUTES
- */
-
-//routig page
+// Halaman utama
 $routes->get('/', 'Home::index');
 
-// routig detail
+// Detail UKM
 $routes->get('/detail-ukm', 'DetailUkm::index');
 
-// routes login
+// Login / Logout
 $routes->get('login', 'Login::index');
-$routes->post('/login', 'Login::auth');
-$routes->get('/logout', 'Login::logout');
+$routes->post('login', 'Login::auth');
+$routes->get('logout', 'Login::logout');
 
-// routes register
-$routes->get('/register', 'Register::index');
-$routes->post('/register', 'Register::store');
+// Register
+$routes->get('register', 'Register::index');
+$routes->post('register', 'Register::store');
 
-/**
- * PRIVATE ROUTES
- */
+// =====================
+// PRIVATE ROUTES
+// =====================
 
-// routes super admin (admin universitas) 
-$routes->group('dashboard/admin', ['filter' => 'rolecheck'], function ($routes) {
+// =====================
+// DASHBOARD SUPER ADMIN (role = 1)
+// =====================
+$routes->group('dashboard/admin', ['filter' => 'rolecheck:1'], function ($routes) {
     $routes->get('/', 'Admin::index');
     $routes->get('ukm', 'Admin::listUkm');
     $routes->get('create', 'Admin::create');
@@ -41,20 +42,41 @@ $routes->group('dashboard/admin', ['filter' => 'rolecheck'], function ($routes) 
     $routes->delete('delete/(:num)', 'Admin::delete/$1');
 });
 
-// routes admin UKM
-$routes->get('dashboard/ukm', 'Ukm::StrukturUKM');
-$routes->get('dashboard/ukm/kalender', 'Ukm::kalender');
-$routes->get('dashboard/ukm/list-anggota', 'Ukm::listAnggota');
-$routes->get('dashboard/ukm/pendaftar', 'Ukm::pendaftar');
-$routes->get('dashboard/ukm/tempt', 'Ukm::tempt');
+// =====================
+// DASHBOARD ADMIN UKM (role = 2)
+// =====================
+$routes->group('dashboard/ukm', ['filter' => 'rolecheck:2'], function ($routes) {
+    $routes->get('ukm', 'Ukm::index');
+    $routes->get('/', 'Ukm::StrukturUKM');
+    $routes->get('kalender', 'Ukm::kalender');
+    $routes->get('list-anggota', 'Ukm::listAnggota');
+    $routes->get('pendaftar', 'Ukm::pendaftar');
+    $routes->get('tempt', 'Ukm::tempt');
 
-// routes user
-$routes->get('dashboard/user', 'User::index');
-$routes->get('dashboard/user/edit-profile', 'User::editProfile');
-$routes->post('dashboard/user/update-profile', 'User::updateProfile');
+    $routes->post('setujui', 'Ukm::setujuiAnggota');
+    $routes->post('tolak', 'Ukm::tolakAnggota');
+});
 
+// =====================
+// DASHBOARD USER (role = 3)
+// =====================
+$routes->group('dashboard/user', ['filter' => 'rolecheck:3'], function ($routes) {
+    $routes->get('user', 'User::index');
+    $routes->get('/', 'User::index');
+    $routes->get('edit-profile', 'User::editProfile');
+    $routes->post('update-profile', 'User::updateProfile');
+});
+
+// =====================
+// AKSES DETAIL UKM DAN PENDAFTARAN (TANPA LOGIN)
+// =====================
 $routes->get('ukm/(:num)', 'Ukm::detail/$1');
 $routes->get('ukm/daftar/(:num)', 'Ukm::daftar/$1');
 
-$routes->post('ukm/setujui', 'Ukm::setujuiAnggota');
-$routes->post('ukm/tolak', 'Ukm::tolakAnggota');
+// =====================
+// AKSES DITOLAK PAGE
+// =====================
+$routes->get('akses-ditolak', 'ErrorPage::aksesDitolak');
+
+
+$routes->get('/dashboard', 'Login::redirectDashboard');

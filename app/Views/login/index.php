@@ -229,7 +229,9 @@
             <h2 class="login-title">Login Akun</h2>
 
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                <div class="alert alert-danger" style="color: red; margin-bottom: 15px;">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
             <?php endif; ?>
             <?php if (session()->getFlashdata('success')): ?>
                 <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>

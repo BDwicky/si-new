@@ -12,13 +12,22 @@ class RoleCheck implements FilterInterface
     {
         $session = session();
 
-        if (!$session->get('logged_in') || $session->get('role') != 1) {
-            return redirect()->to(base_url('/login'))->with('error', 'Akses ditolak!');
+        if (!$session->get('logged_in')) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Jika $arguments diisi, maka batasi berdasarkan role
+        if ($arguments) {
+            $allowedRoles = $arguments; // contoh ['1'], ['2'], ['3']
+
+            if (!in_array((string)$session->get('role'), $allowedRoles)) {
+                return redirect()->to('/akses-ditolak')->with('error', 'Akses ditolak!');
+            }
         }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Tidak perlu dipakai
+        // Kosong
     }
 }
