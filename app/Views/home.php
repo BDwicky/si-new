@@ -257,6 +257,7 @@
                                     <p class="text-muted">
                                         <?= esc(strlen($ukm['deskripsi']) > 100 ? substr($ukm['deskripsi'], 0, 100) . '...' : $ukm['deskripsi']) ?>
                                     </p>
+
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="badge bg-primary">
                                             <i class="fas fa-tag me-1"></i> <?= esc($ukm['kategori']) ?>
@@ -271,8 +272,6 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-
-
         </div>
     </section>
 

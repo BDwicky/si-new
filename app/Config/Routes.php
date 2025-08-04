@@ -9,25 +9,33 @@ use CodeIgniter\Router\RouteCollection;
 // =====================
 // PUBLIC ROUTES
 // =====================
+// =====================
+// PUBLIC ROUTES
+// =====================
 
+// Halaman utama
 // Halaman utama
 $routes->get('/', 'Home::index');
 
 // Detail UKM
+// Detail UKM
 $routes->get('/detail-ukm', 'DetailUkm::index');
 
 // Login / Logout
+// Login / Logout
 $routes->get('login', 'Login::index');
+$routes->post('login', 'Login::auth');
+$routes->get('logout', 'Login::logout');
 $routes->post('login', 'Login::auth');
 $routes->get('logout', 'Login::logout');
 
 // Register
 $routes->get('register', 'Register::index');
 $routes->post('register', 'Register::store');
+// Register
+$routes->get('register', 'Register::index');
+$routes->post('register', 'Register::store');
 
-// =====================
-// PRIVATE ROUTES
-// =====================
 
 // =====================
 // DASHBOARD SUPER ADMIN (role = 1)
@@ -61,8 +69,6 @@ $routes->group('dashboard/ukm', ['filter' => 'rolecheck:2'], function ($routes) 
 
     $routes->get('anggota/edit-jabatan/(:num)', 'Ukm::editJabatan/$1');
     $routes->post('anggota/update-jabatan/(:num)', 'Ukm::updateJabatan/$1');
-
-   // $routes->get('anggota/detail/(:num)', 'Ukm::detail/$1'); // optional, jika kamu punya detail anggota
 });
 
 // =====================

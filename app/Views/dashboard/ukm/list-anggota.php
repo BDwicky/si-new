@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Anggota UKM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         /* Main Layout */
         body {
@@ -18,30 +19,30 @@
             flex-direction: column;
         }
 
-        .badge {
-    display: inline-block;
-    padding: 5px 12px;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 20px;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.badge-aktif {
-    background-color: #c6f6d5; /* Hijau lembut */
-    color: #22543d;
-}
-
-.badge-nonaktif {
-    background-color: #fed7d7; /* Merah lembut */
-    color: #822727;
-}   
-
         .main-content {
             margin-left: 300px;
             padding: 30px;
         }
+
+         .badge {
+        display: inline-block;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 20px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .badge-aktif {
+        background-color: #c6f6d5; /* Hijau lembut */
+        color: #22543d;
+    }
+
+    .badge-nonaktif {
+        background-color: #fed7d7; /* Merah lembut */
+        color: #822727;
+    }
 
         .page-header {
             display: flex;

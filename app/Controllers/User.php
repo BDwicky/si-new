@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Controllers;
+
 
 use App\Models\UserModel;
 use App\Models\UkmModel;
@@ -24,7 +26,7 @@ public function index()
         'active_menu' => 'UKM Saya',
     ];
 
-    $userId = session()->get('id_user');
+        $userId = session()->get('id_user');
 
     // Ambil semua UKM yang diikuti user, termasuk status dan status_in_ukm
     $ukms = $this->ukmModel

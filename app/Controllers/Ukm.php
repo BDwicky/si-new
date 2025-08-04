@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 use App\Models\UserModel;
 use App\Models\UkmModel;
 use CodeIgniter\Controller;
@@ -12,8 +13,10 @@ class Ukm extends BaseController
     protected $ukmModel;
     protected $db;
 
+
     public function __construct()
     {
+        $this->db = \Config\Database::connect();
         $this->db = \Config\Database::connect();
         $this->userModel = new UserModel();
         $this->ukmModel = new UkmModel();
@@ -34,11 +37,24 @@ class Ukm extends BaseController
                 ->countAllResults();
         }
 
+        $ukms = $this->db->table('ukm')
+            ->get()
+            ->getResultArray();
+
+        // Hitung jumlah anggota approved untuk setiap UKM
+        foreach ($ukms as &$ukm) {
+            $ukm['jumlah_anggota'] = $this->db->table('ukm_members')
+                ->where('ukm_id', $ukm['id'])
+                ->where('status', 'approved')
+                ->countAllResults();
+        }
+
         $data = [
             'title' => 'Daftar UKM',
             'active_menu' => 'daftar-ukm',
             'ukms' => $ukms // <--- Tambahkan ini
         ];
+
 
         return view('dashboard/admin/ukm', $data);
     }
@@ -61,6 +77,7 @@ class Ukm extends BaseController
         ];
         return view('dashboard/ukm/kalender', $data);
     }
+
 
 
     public function listAnggota()
@@ -95,12 +112,38 @@ class Ukm extends BaseController
             'anggota' => $anggota
         ];
 
+
         return view('dashboard/ukm/list-anggota', $data);
     }
 
 
+
     public function pendaftar()
     {
+        $userId = session()->get('id_user');
+
+        // Cek UKM mana yang dimiliki user ini
+        $ukm = $this->db->table('ukm')
+            ->select('id')
+            ->where('user_id', $userId)
+            ->get()
+            ->getRow();
+
+        $anggota = [];
+
+        if ($ukm) {
+            // Ambil semua pendaftar (status pending) dari UKM tersebut
+            $anggota = $this->db->table('ukm_members')
+                ->select('ukm_members.id AS id_member, users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+
+                // ->select('users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+                ->join('users', 'users.id = ukm_members.user_id')
+                ->where('ukm_members.ukm_id', $ukm->id)
+                ->where('ukm_members.status', 'pending')
+                ->get()
+                ->getResultArray();
+        }
+
         $userId = session()->get('id_user');
 
         // Cek UKM mana yang dimiliki user ini
@@ -131,8 +174,10 @@ class Ukm extends BaseController
             'anggota' => $anggota
         ];
 
+
         return view('dashboard/ukm/pendaftar', $data);
     }
+
 
 
     public function tempt()

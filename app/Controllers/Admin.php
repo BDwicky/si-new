@@ -23,11 +23,13 @@ class Admin extends Controller
         return view('dashboard/admin/index', $data);
     }
 
+
     // public function listUkm()
     // {
     //     $data['ukms'] = $this->ukmModel->findAll();
     //     return view('dashboard/admin/ukm', $data);
     // }
+
 
     public function listUkm()
     {
@@ -39,9 +41,7 @@ class Admin extends Controller
 
         return view('dashboard/admin/ukm', $data);
     }
-
-
-
+    
     public function create()
     {
         return view('dashboard/admin/create');
@@ -76,6 +76,9 @@ class Admin extends Controller
             // Jika role UKM, tambahkan data ke tabel ukm
             if ($role_id == '2') { // asumsi 2 = UKM
                 $this->ukmModel->insert([
+                    'name' => $data['name'], // atau bisa pakai field ukm_name khusus
+                    'deskripsi' => $this->request->getPost('deskripsi'), // default jika kosong
+                    'kategori' => $this->request->getPost('kategori'),
                     'name' => $data['name'], // atau bisa pakai field ukm_name khusus
                     'deskripsi' => $this->request->getPost('deskripsi'), // default jika kosong
                     'kategori' => $this->request->getPost('kategori'),
@@ -119,6 +122,8 @@ public function edit($id)
 
 
     public function update($id)
+    {
+        $role_id = $this->request->getPost('role_id');
     {
         $role_id = $this->request->getPost('role_id');
 
@@ -173,6 +178,8 @@ public function edit($id)
             }
         }
 
+        return redirect()->to(base_url('dashboard/admin'))->with('success', 'User berhasil diupdate.');
+    }
         return redirect()->to(base_url('dashboard/admin'))->with('success', 'User berhasil diupdate.');
     }
 
