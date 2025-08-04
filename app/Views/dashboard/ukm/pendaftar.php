@@ -407,9 +407,8 @@
     </div>
 
     <script>
-        // Basic functionality for the table
         document.addEventListener('DOMContentLoaded', function() {
-            // Select all checkbox
+            // Select All Checkbox
             const selectAll = document.querySelector('thead .select-checkbox');
             const checkboxes = document.querySelectorAll('tbody .select-checkbox');
 
@@ -419,13 +418,13 @@
                 });
             });
 
-            // Approve/Reject buttons
+            // Approve Button
             document.querySelectorAll('.btn-approve').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = this.dataset.id;
                     const row = this.closest('tr');
 
-                    fetch('<?= base_url("ukm/setujui") ?>', {
+                    fetch('<?= base_url("dashboard/ukm/setujui") ?>', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -435,19 +434,22 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                row.querySelector('.status-badge').className = 'status-badge status-approved';
-                                row.querySelector('.status-badge').textContent = 'Disetujui';
+                                const badge = row.querySelector('.status-badge');
+                                badge.className = 'status-badge status-approved';
+                                badge.textContent = 'Approved';
+                                location.reload();
                             }
                         });
                 });
             });
 
+            // Reject Button
             document.querySelectorAll('.btn-reject').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = this.dataset.id;
                     const row = this.closest('tr');
 
-                    fetch('<?= base_url("ukm/tolak") ?>', {
+                    fetch('<?= base_url("dashboard/ukm/tolak") ?>', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -457,15 +459,16 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                row.querySelector('.status-badge').className = 'status-badge status-rejected';
-                                row.querySelector('.status-badge').textContent = 'Ditolak';
+                                const badge = row.querySelector('.status-badge');
+                                badge.className = 'status-badge status-rejected';
+                                badge.textContent = 'Rejected';
+                                location.reload();
                             }
                         });
                 });
             });
 
-
-            // Search functionality
+            // Search Function
             const searchInput = document.querySelector('.search-input');
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
@@ -476,11 +479,7 @@
                     const nim = row.querySelector('.applicant-nim').textContent.toLowerCase();
                     const ukm = row.cells[2].textContent.toLowerCase();
 
-                    if (name.includes(searchTerm) || nim.includes(searchTerm) || ukm.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = (name.includes(searchTerm) || nim.includes(searchTerm) || ukm.includes(searchTerm)) ? '' : 'none';
                 });
             });
         });
