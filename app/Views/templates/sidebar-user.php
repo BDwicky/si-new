@@ -311,26 +311,7 @@
                     </div>
                 </a>
 
-                <!-- Loop UKM yang approved -->
-                <?php if (!empty($acceptedUKMs)) : ?>
-                    <?php foreach ($acceptedUKMs as $ukm) : ?>
-                        <div class="ukm-group">
-                            <div class="ukm-header"><?= esc($ukm['name']) ?></div>
-                            <a href="<?= base_url('dashboard/ukm/struktur-ukm/' . $ukm['id']) ?>">
-                                <div class="nav-item">
-                                    <i class="fas fa-sitemap"></i>
-                                    <span>Struktur UKM</span>
-                                </div>
-                            </a>
-                            <a href="<?= base_url('dashboard/ukm/kalender/' . $ukm['id']) ?>">
-                                <div class="nav-item">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Kalender Agenda</span>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+
             </nav>
         </div>
 

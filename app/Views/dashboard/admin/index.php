@@ -174,9 +174,7 @@
             <option value="3">User</option>
         </select>
 
-        <a href="<?= base_url('dashboard/admin/create') ?>" class="btn-add-user">
-            <i class="fas fa-plus-circle"></i> Tambah User Baru
-        </a>
+
     </div>
 
     <div class="table-scroll-wrapper">

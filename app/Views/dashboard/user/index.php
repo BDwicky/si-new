@@ -16,18 +16,19 @@
     }
 
     .watermark {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) rotate(-20deg);
-          font-size: 32px;
-          font-weight: bold;
-          color: rgba(255, 0, 0, 0.2); /* Merah transparan */
-          pointer-events: none;
-          z-index: 5;
-          text-transform: uppercase;
-        }
-        
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-20deg);
+      font-size: 32px;
+      font-weight: bold;
+      color: rgba(255, 0, 0, 0.2);
+      /* Merah transparan */
+      pointer-events: none;
+      z-index: 5;
+      text-transform: uppercase;
+    }
+
     h2 {
       font-weight: bold;
       margin-bottom: 2rem;
@@ -181,42 +182,46 @@
     <div class="row">
       <?php foreach ($ukms as $ukm) : ?>
         <div class="col-md-4">
-  <div class="card shadow-sm position-relative">
-    <?php if ($ukm['status_in_ukm'] === 'deactive') : ?>
-      <div class="watermark">DEACTIVE</div>
-    <?php endif; ?>
+          <div class="card shadow-sm position-relative">
+            <?php if ($ukm['status_in_ukm'] === 'deactive') : ?>
+              <div class="watermark">DEACTIVE</div>
+            <?php endif; ?>
 
-    <div class="card-body">
-      <!-- Badge status pendaftaran -->
-      <?php if ($ukm['status'] == 'approved') : ?>
-        <span class="badge bg-success">Anggota</span>
-      <?php elseif ($ukm['status'] == 'pending') : ?>
-        <span class="badge bg-warning text-dark">Pending</span>
-      <?php elseif ($ukm['status'] == 'rejected') : ?>
-        <span class="badge bg-danger">Ditolak</span>
-      <?php endif; ?>
+            <div class="card-body">
+              <!-- Badge status pendaftaran -->
+              <?php if ($ukm['status'] == 'approved') : ?>
+                <span class="badge bg-success">Anggota</span>
+              <?php elseif ($ukm['status'] == 'pending') : ?>
+                <span class="badge bg-warning text-dark">Pending</span>
+              <?php elseif ($ukm['status'] == 'rejected') : ?>
+                <span class="badge bg-danger">Ditolak</span>
+              <?php endif; ?>
 
-      <!-- Ikon -->
-      <div class="card-icon">
-        <?php
-        if (strpos(strtolower($ukm['name']), 'silat') !== false) {
-          echo '<img src="' . base_url('image/ukm/pencak-silat.png') . '" alt="Silat" />';
-        } elseif (strpos(strtolower($ukm['name']), 'futsal') !== false) {
-          echo '<img src="' . base_url('image/ukm/futsal.png') . '" alt="Futsal" />';
-        } elseif (strpos(strtolower($ukm['name']), 'volly') !== false) {
-          echo '<img src="' . base_url('image/ukm/volly.png') . '" alt="Volly" />';
-        } elseif (strpos(strtolower($ukm['name']), 'catur') !== false) {
-          echo '<img src="' . base_url('image/ukm/catur.png') . '" alt="Catur" />';
-        } else {
-          echo '<img src="' . base_url('image/ukm/default.png') . '" alt="UKM" />';
-        }
-        ?>
-      </div>
+              <!-- Ikon -->
+              <div class="card-icon">
+                <?php
+                if (strpos(strtolower($ukm['name']), 'silat') !== false) {
+                  echo '<img src="' . base_url('image/ukm/pencak-silat.png') . '" alt="Silat" />';
+                } elseif (strpos(strtolower($ukm['name']), 'tahfizh') !== false) {
+                  echo '<img src="' . base_url('image/ukm/ukm al-quran.png') . '" alt="tahfizh" />';
+                } elseif (strpos(strtolower($ukm['name']), 'bola') !== false) {
+                  echo '<img src="' . base_url('image/ukm/futsal.png') . '" alt="Futsal" />';
+                } elseif (strpos(strtolower($ukm['name']), 'volly') !== false) {
+                  echo '<img src="' . base_url('image/ukm/volly.png') . '" alt="Volly" />';
+                } elseif (strpos(strtolower($ukm['name']), 'catur') !== false) {
+                  echo '<img src="' . base_url('image/ukm/catur.png') . '" alt="Catur" />';
+                } elseif (strpos(strtolower($ukm['name']), 'seni') !== false) {
+                  echo '<img src="' . base_url('image/ukm/ukm lukis.png') . '" alt="UKM" />';
+                } else {
+                  echo '<img src="' . base_url('image/ukm/default.png') . '" alt="UKM" />';
+                }
+                ?>
+              </div>
 
-      <h5 class="card-title"><?= $ukm['name'] ?></h5>
-    </div>
-  </div>
-</div>
+              <h5 class="card-title"><?= $ukm['name'] ?></h5>
+            </div>
+          </div>
+        </div>
 
       <?php endforeach; ?>
     </div>

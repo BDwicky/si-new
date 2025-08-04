@@ -279,19 +279,7 @@
         <div class="nav-container">
             <nav>
 
-                <a href="<?= base_url('dashboard/ukm') ?>" style="text-decoration: none;">
-                    <div class="nav-item <?= ($active_menu == 'dashboard/ukm/struktur-ukm') ? 'active' : '' ?>">
-                        <i class="fas fa-sitemap"></i>
-                        <span>Struktur UKM</span>
-                    </div>
-                </a>
 
-                <a href="<?= base_url('dashboard/ukm/kalender') ?>" style="text-decoration: none;">
-                    <div class="nav-item <?= ($active_menu == 'dashboard/ukm/kalender') ? 'active' : '' ?>">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Kalender Agenda</span>
-                    </div>
-                </a>
 
                 <a href="<?= base_url('dashboard/ukm/list-anggota') ?>" style="text-decoration: none;">
                     <div class="nav-item <?= ($active_menu == 'dashboard/ukm/anggota') ? 'active' : '' ?>">
@@ -308,6 +296,19 @@
                 </a>
 
                 <?php /*
+                <a href="<?= base_url('dashboard/ukm') ?>" style="text-decoration: none;">
+                    <div class="nav-item <?= ($active_menu == 'dashboard/ukm/struktur-ukm') ? 'active' : '' ?>">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Struktur UKM</span>
+                    </div>
+                </a>
+
+                <a href="<?= base_url('dashboard/ukm/kalender') ?>" style="text-decoration: none;">
+                    <div class="nav-item <?= ($active_menu == 'dashboard/ukm/kalender') ? 'active' : '' ?>">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Kalender Agenda</span>
+                    </div>
+                </a>
                 <a href="<?= base_url('dashboard/ukm/tempt') ?>" style="text-decoration: none;">
                     <div class="nav-item <?= ($active_menu == 'dashboard/ukm/tempt') ? 'active' : '' ?>">
                         <i class="fas fa-cog"></i>

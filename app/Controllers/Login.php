@@ -55,7 +55,7 @@ class Login extends BaseController
                 case 1:
                     return redirect()->to('dashboard/admin')->with('success', 'Login berhasil.');
                 case 2:
-                    return redirect()->to('dashboard/ukm')->with('success', 'Login berhasil.');
+                    return redirect()->to('dashboard/ukm/list-anggota')->with('success', 'Login berhasil.');
                 case 3:
                     return redirect()->to('dashboard/user')->with('success', 'Login berhasil.');
                 default:

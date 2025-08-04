@@ -139,7 +139,7 @@
 
         .registrations-table th {
             padding: 12px 15px;
-            text-align: left;
+            text-align: center;
             font-weight: 600;
             font-size: 14px;
         }
@@ -221,6 +221,7 @@
         .action-buttons {
             display: flex;
             gap: 8px;
+            justify-content: center;
         }
 
         .action-btn {
@@ -290,54 +291,23 @@
     <div class="main-content">
         <div class="page-header">
             <h1 class="page-title">Pendaftaran Anggota UKM</h1>
-            <div class="action-buttons">
-                <button class="btn btn-outline">
-                    <i class="fas fa-file-export"></i> Export Data
-                </button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-filter"></i> Filter Lanjutan
-                </button>
-            </div>
+
         </div>
 
         <div class="registrations-table-container">
             <div class="table-controls">
-                <div class="bulk-actions">
-                    <select class="bulk-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
-                        <option>Aksi Massal</option>
-                        <option>Setujui yang dipilih</option>
-                        <option>Tolak yang dipilih</option>
-                        <option>Hapus yang dipilih</option>
-                    </select>
-                    <button class="btn btn-outline" style="padding: 8px 12px;">
-                        Terapkan
-                    </button>
-                </div>
                 <div class="search-filter">
                     <div class="search-box">
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" class="search-input" placeholder="Cari pendaftar...">
                     </div>
-                    <select class="filter-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; min-width: 150px;">
-                        <option>Semua UKM</option>
-                        <option>UKM Futsal</option>
-                        <option>UKM Pencak Silat</option>
-                        <option>UKM Bola Volly</option>
-                        <option>UKM Catur</option>
-                    </select>
-                    <select class="filter-select" style="padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; min-width: 150px;">
-                        <option>Semua Status</option>
-                        <option>Pending</option>
-                        <option>Disetujui</option>
-                        <option>Ditolak</option>
-                    </select>
                 </div>
             </div>
 
             <table class="registrations-table">
                 <thead>
                     <tr>
-                        <th width="40"><input type="checkbox" class="select-checkbox"></th>
+
                         <th>Nama Pendaftar</th>
                         <th>Fakultas</th>
                         <th>Program Studi</th>
@@ -350,7 +320,6 @@
                     <?php if (!empty($anggota)) : ?>
                         <?php foreach ($anggota as $row) : ?>
                             <tr>
-                                <td><input type="checkbox" class="select-checkbox"></td>
                                 <td>
                                     <div class="applicant-info">
                                         <div class="applicant-avatar">
@@ -374,9 +343,6 @@
                                     <div class="action-buttons">
                                         <button class="action-btn btn-approve" data-id="<?= $row['id_member'] ?>" title="Setujui">
                                             <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="action-btn btn-reject" data-id="<?= $row['id_member'] ?>" title="Tolak">
-                                            <i class="fas fa-times"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -408,15 +374,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Select All Checkbox
-            const selectAll = document.querySelector('thead .select-checkbox');
-            const checkboxes = document.querySelectorAll('tbody .select-checkbox');
 
-            selectAll.addEventListener('change', function() {
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = selectAll.checked;
-                });
-            });
 
             // Approve Button
             document.querySelectorAll('.btn-approve').forEach(btn => {

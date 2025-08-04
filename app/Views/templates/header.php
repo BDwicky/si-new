@@ -31,7 +31,7 @@
                 if ($role == 1) {
                     $dashboardUrl = 'dashboard/admin';
                 } elseif ($role == 2) {
-                    $dashboardUrl = 'dashboard/ukm';
+                    $dashboardUrl = 'dashboard/ukm/list-anggota';
                 } elseif ($role == 3) {
                     $dashboardUrl = 'dashboard/user';
                 } else {

@@ -23,21 +23,20 @@
 
         body,
         html {
-            height: auto;
-            overflow: auto;
+            height: 100vh;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .hero-container {
-            min-height: 100vh;
+            height: 100vh;
             background: var(--primary-gradient);
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* agar konten di tengah horizontal */
-            padding: 50px 0;
-            /* beri ruang atas bawah */
+            padding: 20px;
         }
 
         .hero-background {
@@ -69,25 +68,25 @@
         }
 
         .floating-circle:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 10%;
+            width: 80px;
+            height: 80px;
+            top: 15%;
             left: 10%;
             animation-delay: 0s;
         }
 
         .floating-circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             top: 60%;
             right: 15%;
             animation-delay: 3s;
         }
 
         .floating-circle:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 30%;
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
             left: 70%;
             animation-delay: 6s;
         }
@@ -101,30 +100,27 @@
             }
 
             50% {
-                transform: translateY(-30px) rotate(180deg);
+                transform: translateY(-20px) rotate(180deg);
                 opacity: 0.7;
             }
         }
 
         .hero-content {
             position: relative;
-            z-index: 10;
-            width: 80%;
-            max-width: 1400px;
-            margin: 0 auto;
-            margin-top: 20px;
-            margin-bottom: 20px;
-
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 800px;
         }
 
         .main-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            min-height: 85vh;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -132,9 +128,10 @@
         .card-header-hero {
             background: var(--primary-gradient);
             color: white;
-            padding: 3rem 3rem 2rem;
+            padding: 2rem;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .card-header-hero::before {
@@ -165,29 +162,31 @@
         .hero-header-content {
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .ukm-title {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .category-badge {
             background: rgba(255, 255, 255, 0.2);
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             backdrop-filter: blur(10px);
             display: inline-block;
         }
 
         .hero-icon {
-            font-size: 5rem;
+            font-size: 3.5rem;
             opacity: 0.6;
             animation: pulse 3s ease-in-out infinite;
         }
@@ -208,66 +207,76 @@
 
         .hero-body {
             flex: 1;
-            padding: 3rem;
+            padding: 2rem;
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+            min-height: 0;
         }
 
         .content-left {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            min-height: 0;
         }
 
         .content-right {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .description-section {
             background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            border-radius: 25px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            padding: 2rem;
             border: 1px solid rgba(31, 41, 55, 0.1);
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .description-title {
             color: #1f2937;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .description-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #374151;
+            flex: 1;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex: 1;
         }
 
         .stat-card {
             background: var(--primary-gradient);
             color: white;
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 15px;
             text-align: center;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
+
 
         .stat-card:hover {
             transform: scale(1.05);
@@ -289,30 +298,30 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
             font-weight: 500;
         }
 
         .quick-info-card {
             background: rgba(31, 41, 55, 0.05);
-            border-radius: 20px;
-            padding: 1.5rem;
+            border-radius: 15px;
+            padding: 1.2rem;
             border: 1px solid rgba(31, 41, 55, 0.1);
         }
 
         .quick-info-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 0.5rem;
@@ -322,25 +331,24 @@
         }
 
         .quick-info-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #6b7280;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .action-section {
             display: flex;
             gap: 1rem;
-            margin-top: auto;
-            padding-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .btn-hero-primary {
             background: var(--primary-gradient);
             border: none;
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             color: white;
             text-decoration: none;
@@ -352,18 +360,18 @@
         }
 
         .btn-hero-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(31, 41, 55, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(31, 41, 55, 0.4);
             color: white;
         }
 
         .btn-hero-secondary {
             background: var(--secondary-gradient);
             border: none;
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             color: white;
             text-decoration: none;
@@ -375,41 +383,51 @@
         }
 
         .btn-hero-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(55, 65, 81, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(55, 65, 81, 0.4);
             color: white;
         }
 
         .hero-footer {
             background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            padding: 1.5rem 3rem;
+            padding: 1rem 2rem;
             border-top: 1px solid rgba(31, 41, 55, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: #6b7280;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            flex-shrink: 0;
         }
 
         /* Responsive Design */
         @media (max-width: 1200px) {
             .hero-body {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
+                padding: 1.5rem;
             }
 
             .ukm-title {
-                font-size: 2.8rem;
+                font-size: 2.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
+            .hero-container {
+                padding: 15px;
+            }
+
             .hero-content {
-                padding: 1rem;
+                width: 95%;
+                height: 95vh;
             }
 
             .main-card {
-                min-height: 95vh;
                 border-radius: 20px;
             }
 
@@ -420,11 +438,12 @@
             }
 
             .ukm-title {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
 
             .hero-body {
-                padding: 2rem;
+                padding: 1.5rem;
+                gap: 1rem;
             }
 
             .action-section {
@@ -433,8 +452,35 @@
 
             .hero-footer {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.3rem;
                 text-align: center;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                height: 98vh;
+            }
+
+            .card-header-hero {
+                padding: 1.5rem;
+            }
+
+            .ukm-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-body {
+                padding: 1rem;
+            }
+
+            .description-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -478,23 +524,7 @@
                             </p>
                         </div>
 
-                        <div class="action-section">
-                            <?php if (session()->has('id_user')): ?>
-                                <button id="btn-daftar" class="btn-hero-primary">
-                                    <i class="fas fa-user-plus"></i>
-                                    Daftar Sebagai Anggota
-                                </button>
-                            <?php else: ?>
-                                <a href="<?= base_url('login') ?>" class="btn-hero-secondary">
-                                    <i class="fas fa-sign-in-alt"></i>
-                                    Login untuk Daftar
-                                </a>
-                            <?php endif; ?>
-                            <a href="#" class="btn-hero-secondary">
-                                <i class="fas fa-info-circle"></i>
-                                Info Lebih Lanjut
-                            </a>
-                        </div>
+
                     </div>
 
                     <div class="content-right">
@@ -516,24 +546,23 @@
                             </div>
                         </div>
 
-                        <div class="quick-info-card">
-                            <h6 class="quick-info-title">
-                                <i class="fas fa-bullseye"></i>
-                                Visi & Misi
-                            </h6>
-                            <p class="quick-info-text">
-                                Mengembangkan potensi mahasiswa melalui kegiatan positif dan prestasi.
-                            </p>
-                        </div>
 
-                        <div class="quick-info-card">
-                            <h6 class="quick-info-title">
-                                <i class="fas fa-star"></i>
-                                Keunggulan
-                            </h6>
-                            <p class="quick-info-text">
-                                Pembinaan intensif, networking luas, dan kesempatan pengembangan diri.
-                            </p>
+
+
+
+
+                        <div class="action-section">
+                            <?php if (session()->has('id_user')): ?>
+                                <button id="btn-daftar" class="btn-hero-primary">
+                                    <i class="fas fa-user-plus"></i>
+                                    Daftar Sebagai Anggota
+                                </button>
+                            <?php else: ?>
+                                <a href="<?= base_url('login') ?>" class="btn-hero-secondary">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Login untuk Daftar
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
