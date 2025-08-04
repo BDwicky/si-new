@@ -78,7 +78,8 @@ class Ukm extends BaseController
         if ($ukm) {
             // Ambil semua anggota dari UKM tersebut
             $anggota = $this->db->table('ukm_members')
-                ->select('users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+                ->select('ukm_members.id AS id_member, users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+                // ->select('users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
                 ->join('users', 'users.id = ukm_members.user_id')
                 ->where('ukm_members.ukm_id', $ukm->id)
                 ->where('ukm_members.status', 'approved')
@@ -114,7 +115,9 @@ class Ukm extends BaseController
         if ($ukm) {
             // Ambil semua pendaftar (status pending) dari UKM tersebut
             $anggota = $this->db->table('ukm_members')
-                ->select('users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+                ->select('ukm_members.id AS id_member, users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
+
+                // ->select('users.name AS nama_user, users.nim, users.program_studi, users.fakultas, ukm_members.status, ukm_members.role_in_ukm, ukm_members.created_at')
                 ->join('users', 'users.id = ukm_members.user_id')
                 ->where('ukm_members.ukm_id', $ukm->id)
                 ->where('ukm_members.status', 'pending')
@@ -139,5 +142,79 @@ class Ukm extends BaseController
             'active_menu' => 'tempt'
         ];
         return view('dashboard/ukm/tempt', $data);
+    }
+
+    public function detail($id)
+    {
+        $ukm = $this->ukmModel->find($id);
+
+        if (!$ukm) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("UKM tidak ditemukan.");
+        }
+
+        // Hitung jumlah anggota yang disetujui
+        $jumlahAnggota = $this->db->table('ukm_members')
+            ->where('ukm_id', $id)
+            ->where('status', 'approved')
+            ->countAllResults();
+
+        $data = [
+            'title' => 'Detail UKM',
+            'active_menu' => 'daftar-ukm',
+            'ukm' => $ukm,
+            'jumlah_anggota' => $jumlahAnggota
+        ];
+
+        return view('dashboard/ukm/detail-ukm', $data);
+    }
+
+    public function daftar($ukm_id)
+    {
+        // Cek apakah user login
+        if (!session()->has('id_user')) {
+            return redirect()->to('/login')->with('error', 'Silakan login untuk mendaftar ke UKM.');
+        }
+
+        $user_id = session()->get('id_user');
+
+        // Cek apakah user sudah pernah mendaftar ke UKM ini
+        $existing = $this->db->table('ukm_members')
+            ->where('user_id', $user_id)
+            ->where('ukm_id', $ukm_id)
+            ->get()
+            ->getRow();
+
+        if ($existing) {
+            return redirect()->back()->with('error', 'Kamu sudah mendaftar ke UKM ini.');
+        }
+
+        // Simpan ke database
+        $this->db->table('ukm_members')->insert([
+            'user_id' => $user_id,
+            'ukm_id' => $ukm_id,
+            'status' => 'pending',
+            'role_in_ukm' => 'anggota',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil mendaftar! Menunggu persetujuan.');
+    }
+
+    public function setujuiAnggota()
+    {
+        $id = $this->request->getPost('id');
+        $model = new \App\Models\UkmMemberModel();
+        $model->update($id, ['status' => 'approved']);
+
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    public function tolakAnggota()
+    {
+        $id = $this->request->getPost('id');
+        $model = new \App\Models\UkmMemberModel();
+        $model->update($id, ['status' => 'rejected']);
+
+        return $this->response->setJSON(['success' => true]);
     }
 }

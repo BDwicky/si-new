@@ -247,28 +247,30 @@
                     <div class="col-lg-4 col-md-6 ukm-item"
                         data-category="<?= esc(strtolower($ukm['kategori'])) ?>"
                         data-name="<?= esc(strtolower($ukm['name'])) ?>">
-                        <div class="feature-card h-100">
-                            <div class="p-4">
-                                <div class="d-flex align-items-center mb-3">
-                                    <!-- Gunakan ikon FontAwesome sesuai data atau kategori -->
-                                    <i class="fas fa-users fa-3x text-primary me-3"></i>
-                                    <h4 class="mb-0"><?= esc($ukm['name']) ?></h4>
+                        <a href="<?= base_url('ukm/' . $ukm['id']) ?>" target="_blank" class="text-decoration-none text-dark">
+                            <div class="feature-card h-100">
+                                <div class="p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-users fa-3x text-primary me-3"></i>
+                                        <h4 class="mb-0"><?= esc($ukm['name']) ?></h4>
+                                    </div>
+                                    <p class="text-muted"><?= esc($ukm['deskripsi']) ?></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-primary">
+                                            <i class="fas fa-tag me-1"></i> <?= esc($ukm['kategori']) ?>
+                                        </span>
+                                        <small class="text-muted">
+                                            <i class="fas fa-users me-1"></i> <?= esc($ukm['jumlah_anggota']) ?> anggota
+                                        </small>
+                                    </div>
                                 </div>
-                                <p class="text-muted"><?= esc($ukm['deskripsi']) ?></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-primary">
-                                        <i class="fas fa-tag me-1"></i> <?= esc($ukm['kategori']) ?>
-                                    </span>
-                                    <small class="text-muted">
-                                        <i class="fas fa-users me-1"></i> <?= esc($ukm['jumlah_anggota']) ?> anggota
-                                    </small>
-                                </div>
-
                             </div>
-                        </div>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
+
+
         </div>
     </section>
 

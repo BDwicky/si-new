@@ -372,14 +372,11 @@
                                 </td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="action-btn btn-approve" title="Setujui">
+                                        <button class="action-btn btn-approve" data-id="<?= $row['id_member'] ?>" title="Setujui">
                                             <i class="fas fa-check"></i>
                                         </button>
-                                        <button class="action-btn btn-reject" title="Tolak">
+                                        <button class="action-btn btn-reject" data-id="<?= $row['id_member'] ?>" title="Tolak">
                                             <i class="fas fa-times"></i>
-                                        </button>
-                                        <button class="action-btn btn-view" title="Detail">
-                                            <i class="fas fa-eye"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -425,21 +422,48 @@
             // Approve/Reject buttons
             document.querySelectorAll('.btn-approve').forEach(btn => {
                 btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
                     const row = this.closest('tr');
-                    row.querySelector('.status-badge').className = 'status-badge status-approved';
-                    row.querySelector('.status-badge').textContent = 'Disetujui';
-                    // In real implementation, you would make an AJAX call here
+
+                    fetch('<?= base_url("ukm/setujui") ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `id=${id}`
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                row.querySelector('.status-badge').className = 'status-badge status-approved';
+                                row.querySelector('.status-badge').textContent = 'Disetujui';
+                            }
+                        });
                 });
             });
 
             document.querySelectorAll('.btn-reject').forEach(btn => {
                 btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
                     const row = this.closest('tr');
-                    row.querySelector('.status-badge').className = 'status-badge status-rejected';
-                    row.querySelector('.status-badge').textContent = 'Ditolak';
-                    // In real implementation, you would make an AJAX call here
+
+                    fetch('<?= base_url("ukm/tolak") ?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `id=${id}`
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                row.querySelector('.status-badge').className = 'status-badge status-rejected';
+                                row.querySelector('.status-badge').textContent = 'Ditolak';
+                            }
+                        });
                 });
             });
+
 
             // Search functionality
             const searchInput = document.querySelector('.search-input');

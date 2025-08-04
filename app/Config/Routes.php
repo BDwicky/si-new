@@ -52,3 +52,9 @@ $routes->get('dashboard/ukm/tempt', 'Ukm::tempt');
 $routes->get('dashboard/user', 'User::index');
 $routes->get('dashboard/user/edit-profile', 'User::editProfile');
 $routes->post('dashboard/user/update-profile', 'User::updateProfile');
+
+$routes->get('ukm/(:num)', 'Ukm::detail/$1');
+$routes->get('ukm/daftar/(:num)', 'Ukm::daftar/$1');
+
+$routes->post('ukm/setujui', 'Ukm::setujuiAnggota');
+$routes->post('ukm/tolak', 'Ukm::tolakAnggota');
